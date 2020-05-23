@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <link rel="stylesheet" href="css/photos.css">
+</head>
+<body>
+   <a href="/profile"> Back To Profile</a>
+   <form method="post" action="/addPhoto" id='addPhoto' enctype="multipart/form-data"> 
+		<input type="file" name="photo"> 	
+		<button>Add Photo</button>   	
+   </form>
+   
+   <div id="allPhotos">
+      <% photos.forEach((i)=>{ %>
+         <div class="image">
+            <img src="<%=i.name%>">
+            <button id='del' data-id=<%=i.id%>>Delete</button>
+            <button id='set' data-id="<%=i.id%>">Set a Avatar</button>
+
+         </div>
+      <%})%>
+   </div>
+   
+</body>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+   <script src="js/photos.js"></script>
+</html>

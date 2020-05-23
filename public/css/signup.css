@@ -1,0 +1,56 @@
+body{
+   background-image: url('../designImages/signupBack.jpg');
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+   background-size: cover;
+
+}
+#head > h2{
+   font-family: 'Comfortaa', cursive;
+   text-align: center;
+   margin-left: 50px;
+   font-size: 2em;
+}
+.form_inp{
+   width: 150px;
+   height: 25px;
+   border-radius: 5px;
+   transition: 0.5s;
+   padding-left: 15px;
+
+}
+.form_inp:hover{
+   background-color:#E7E7E7;
+   transition: 0.5s;
+}
+#form{
+   padding: 15px;
+   width: 300px;
+   height: auto;
+   background-color: rgba(256, 256, 256, 0.5);
+   text-align: center;
+   margin: 10px 50px;
+   margin: 0 auto;
+}
+#submit{
+   background-color: #DEDEDE;
+   display: block;
+   width: 90px;
+  
+   height: 25px;
+   cursor: pointer;
+   border: 1.5px solid black;
+   margin: 0 auto;
+   margin-top: 20px;
+
+}
+.link{
+   text-align: center;
+   margin:10px 30px;
+}
+.logLink{
+   color: black;
+}
+.error{
+   color: red;
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="css/signup.css">
+   <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap" rel="stylesheet">
+
+   <title>SignUp Page</title>
+</head>
+<body>
+   <div id="head">
+      <h2>Create Account</h2>
+   </div>
+   <div id='form'>
+      <form action="signupForm" method="post">
+         <p class="error"><%=errors.name%></p>
+         <input type="text"  class='form_inp'value='<%=value.name%>' name="name" placeholder="name">
+         <p class="error"><%=errors.surname%></p>
+         <input type="text" class='form_inp'  value='<%=value.surname%>' name='surname' placeholder="surname">
+         <p class="error"><%=errors.age%></p>
+         <input type="text" class='form_inp' value='<%=value.age%>' name='age' placeholder="age">
+         <p class="error"><%=errors.email%></p>
+         <input type="text" class='form_inp' value='<%=value.email%>' name='email' placeholder="email">
+         <p class="error"><%=errors.password%></p>
+         <input type="password" class='form_inp' value='<%=value.password%>' name='password' placeholder="password">
+         <p class="error"><%=errors.confirm_password%></p>
+         <input type="password" class='form_inp' value='<%=value.confirm_password%>' name='confirm_password' placeholder="comfirm password ">
+         <button id='submit'>Sign Up</button>
+      </form>
+   </div>
+
+   <div class="link">
+      <p>If you have a account click here! <span><a class="logLink" href="/login">Login</a></span></p>
+   </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <link rel="stylesheet" href="css/signup.css">
+   <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+   <div id="head">
+      <h2>Log In</h2>
+   </div>
+   <div id="form">
+      <form action="loginForm" method="post">
+         <p class="error"><%=errors.email%></p>
+         <input class='form_inp' type="text" name='email' placeholder="enter your email ">
+         <p class="error"><%=errors.password%></p>
+         <input class='form_inp' type="password" name='password' placeholder="enter your password">
+         <button id="submit">Log In</button>
+      </form>
+   </div>
+   
+   <div class="link">
+      <p>If you haven`t account click here! <span><a class="logLink" href="/">Registration</a></span></p>
+   </div>
+
+ 
+   
+</body>
+</html>

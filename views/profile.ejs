@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <link rel="stylesheet" href="css/profile.css">
+</head>
+<body>
+  <a href="/login">Log Out</a>
+  <img src="<%=user.image%>" alt="">
+  <form method="post" action="/uploadImage" enctype="multipart/form-data"> 
+		<input type="file" name="image"> 	
+		<button>Change Avatar</button>   	
+	</form>
+	
+  <div class="info">
+    
+    <p> Name <span class="data" id="name"> <%=user.name%> </span></p>
+    <p> Surname <span class="data" id="surname"> <%=user.surname%></span></p>
+    <p>Age <span class="data" id="age"><%=user.age %></span></p>
+  </div>
+  
+  <a href="profile/edit">Edit Datas</a>
+
+  <a href="photos">View Photos</a>
+   
+</body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+  <script src="js/profile.js"></script>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <link rel="stylesheet" href="css/eddata.css">
+
+</head>
+<body>
+   <form action="/editData" method="post">
+      <label>Name</label>
+         <p><%=errors.name%></p>  
+         <input type="text" name='name' class="inp" value = <%=user.name%>> <br>
+
+      <label>Surname</label>
+         <p><%=errors.surname%></p>  
+         <input type="text" class="inp"  name='surname' value = <%=user.surname%>> <br>
+      <label>Age</label> 
+         <p><%=errors.age%></p>
+         <input type="text" class="inp"  name='age'value = <%= user.age%>> <br>
+      <label>Email</label>
+         <p><%=errors.email%></p>
+         <input class="inp" type="text" name="email" value = <%=user.email%>> <br>
+      <button>Edit</button>
+   </form>
+   
+</body>
+</html>

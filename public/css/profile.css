@@ -1,0 +1,19 @@
+img{
+	display: block;
+	width: 200px;
+	height: 200px;
+	margin-top: 30px;
+}
+input,button{
+   display: block;
+   margin-top: 20px;
+}
+span{
+	font-weight: 600;
+
+}
+a{
+	display: block;
+	margin-top: 15px;
+	color:black;
+}
