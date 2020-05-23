@@ -1,19 +1,216 @@
-img{
-	display: block;
-	width: 200px;
-	height: 200px;
-	margin-top: 30px;
+body{
+	margin: 0;
+	padding:0;
+	font-family: serif;
+	background-color: #EDEEF0; 
 }
-input,button{
-   display: block;
-   margin-top: 20px;
+
+/* header css */
+
+nav.navbar.navbar-light{
+	background: #4A76A8;
+ }
+ nav.navbar a.navbar-brand{
+ color: #fff;
+ }
+ ul.navbar-nav li.nav-item a.nav-link{
+	margin: 0 5px ;	 
+ 	color: #fff;
+ 	font-size: 10px;
+ }
+ .navbar-brand{
+	transform:translateY(-50%) ;
+	 width: 30px;
+	 height: 30px;
+	 /* margin-bottom: 10px	; */
+	 /* text-align: center; */
+ }
+
+ .navbar-brand > img{
+	 width: 40px;
+	 height: 40px;
+ }
+ ul.navbar-nav li.nav-item a.nav-link .linkIcon{
+	 margin-right: 5px;
+	 font-size: 13px;
+ }
+ .dropdown-menu{
+	 background-color:#4A76A8 ;
+ }
+ .containerHead{
+	 width: 85%;
+	 margin: auto;
+ }
+header{
+	background: #4A76A8;
 }
-span{
-	font-weight: 600;
+#navbarDropdown{
+	display: flex;
+}
+#headerAvatar{ 
+	margin-right: 5px;
+
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	overflow: hidden;
+}
+#dropName{
+	font-size: 10px;
+}
+
+#headerAvatar > img{
+	width: 100%;
+	height: 100%;
 
 }
-a{
-	display: block;
-	margin-top: 15px;
-	color:black;
+#searchInp{
+	width: 130px;
+	border-radius: 5px;
+	padding-left: 10px;
+	margin:5px 10px;
+	box-sizing: border-box;
 }
+/* header css end */
+
+/* useravatar  */
+#main{
+	background-color: #EDEEF0;
+
+}
+.avatarInfo{
+	display: flex;
+	flex-direction: initial;
+	align-items: stretch;
+	width: 85%;
+	margin: auto;
+	padding: 20px 10px;
+	height: 400px;
+	/* border: 2px solid; */
+}
+.fotoFriend{
+	
+	margin: 20px;
+	height: 50px;
+	/* border: 2px solid red; */
+}
+.fotoFriend > ul {
+	display: flex;
+	padding: 0;
+}
+.fotoFriend > ul > li{
+	list-style: none;
+	margin-right:10px;
+	
+}
+.fotoFriend > ul > li > a{
+	color: #718BA8;
+}
+.info{
+	margin: 15px 0;
+	font-family: bold;
+}
+.userAvatar{
+	text-align: center;
+	background-color: white;
+	margin: 20px 0 0 40px;
+	width: 200px;
+	height: 300px;
+	/* border: 1px solid; */
+	
+}
+
+.userAvatarimage{
+	
+	/* transform: translateX(11%); */
+	width: 120px;
+	margin:20px 0 0 40px ;
+	height: 120px;
+	/* border: 2px solid; */
+	border-radius: 50%;
+	overflow: hidden;
+}
+.userAvatarimage > img{
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+
+}
+
+.changeBtn{
+	background-color: #718BA8;
+	padding: 5px 10px;
+	color: white;
+	margin-top: 20px;
+	font-size: 10px;
+	border: none;
+}
+.year{
+	font-size: 12px;
+}
+
+/* userAvatarend */
+
+
+
+/* The Modal (background) */
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	padding-top: 100px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100px; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+ }
+ 
+ /* Modal Content */
+ .modal-content {
+	text-align: center;
+	background-color: #fefefe;
+	margin: auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+ }
+ 
+ /* The Close Button */
+ .close {
+	 transform: translateX(-50%);
+	color: #aaaaaa;
+	/* margin-left: 25px; */
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+ }
+ 
+ .close:hover,
+ .close:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+	
+ }
+ .modalHeadText{
+	 font-family: tahoma;
+ }
+ .modalChange{
+	background-color: #718BA8;
+	padding: 5px 45px;
+	color: white;
+	margin-top: 20px;
+	font-size: 10px;
+	border: none;
+ }
+ #avatarInp{
+	 cursor: pointer;
+	 border: none;
+	 width: 200px;
+	 font-size: 10px;
+	 margin-right: 30px;
+ }
+/* useravatarend */

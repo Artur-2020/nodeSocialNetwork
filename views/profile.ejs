@@ -1,31 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title>
-   <link rel="stylesheet" href="css/profile.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/profile.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.lineicons.com/2.0/LineIcons.css">
 </head>
 <body>
-  <a href="/login">Log Out</a>
-  <img src="<%=user.image%>" alt="">
-  <form method="post" action="/uploadImage" enctype="multipart/form-data"> 
-		<input type="file" name="image"> 	
-		<button>Change Avatar</button>   	
-	</form>
-	
-  <div class="info">
-    
-    <p> Name <span class="data" id="name"> <%=user.name%> </span></p>
-    <p> Surname <span class="data" id="surname"> <%=user.surname%></span></p>
-    <p>Age <span class="data" id="age"><%=user.age %></span></p>
-  </div>
-  
-  <a href="profile/edit">Edit Datas</a>
+  <!-- navbar start -->
+  <header>
+    <div class="containerHead">
+      <nav class="navbar navbar-expand-lg navbar-light my-navbar">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <img src="image/logo.png" alt="">
+          </a>
 
-  <a href="photos">View Photos</a>
-   
+           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+             <span class="navbar-toggler-icon"></span>
+           </button>
+  
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#"> <i class="lni lni-home   linkIcon"></i>Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"> <i class="lni lni-game linkIcon"></i> Games</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"> <i class="lni lni-alarm linkIcon"></i>Notifications</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"> Friend Requests</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="#"> <i class="lni lni-envelope linkIcon"></i>Messages</a>
+            </li>
+            <li class="nav-item">
+             <input type="text" id="searchInp" placeholder="Search">
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div id="headerAvatar">
+                  <img src="<%=user.image%>" alt="">
+                </div>
+                <p id="dropName"><%=user.name%></p>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="profile/edit"> <i class="lni lni-cog"></i> Edit</a>
+                <a class="dropdown-item" href="/login"> <i class="lni lni-exit"></i> Log Out</a>
+                <div class="dropdown-divider"></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <!-- navbar end -->
+
+  <!-- main start -->
+  <div id="main">
+    <div class="avatarInfo">
+      <div class="userAvatar">
+        <div class="userAvatarimage">
+          <img src="<%=user.image%>" alt="">
+        </div>
+        <div class="changeAvatar">
+          <button class="changeBtn" id="myBtn">Change Avatar</button>
+        </div>
+        <div class="info">
+          <p><%=user.name%> <%=user.surname%></p>
+          <p class="year"><%=user.age%> Years Old</p>
+        </div>
+      </div>
+      <div class="fotoFriend">
+        <ul>
+          <li><a href="/photos">  <i class="lni lni-image"></i> Photos</a></li>
+          <li><a href="#"> Friends</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="changeAvatarModal">
+      <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+       
+
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2 class="modalHeadText">Change Avatar</h2>
+          <form method="post" action="/uploadImage" enctype="multipart/form-data"> 
+            <input type="file" name="image" id="avatarInp"> 	
+            <button class="modalChange">Change</button>   	
+          </form>
+
+        </div>
+      
+      </div>
+    </div>
+    
+  </div>
 </body>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
   <script src="js/profile.js"></script>
 </html>
