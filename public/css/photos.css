@@ -141,6 +141,7 @@ header{
 	cursor: pointer;
 }
 img{
+	margin-bottom: 15px;
 	transition: 0.3s;
 	border-radius: 10%;
    width: 100%;
@@ -156,6 +157,7 @@ img{
 	color: white;
 	border: none;
 	padding: 5px;
+	margin-left: 20px;
 	height: 30px;
 	width: 70px;
 	font-size: 12px;
@@ -168,6 +170,7 @@ img{
 	color: white;
 	border: none;
 	padding: 5px;
+	margin-left: 20px;
 	height: 30px;
 	width: auto;
 	font-size: 12px;

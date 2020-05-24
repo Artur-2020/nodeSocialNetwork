@@ -38,7 +38,7 @@
              <a class="nav-link" href="#"> <i class="lni lni-alarm linkIcon"></i>Notifications</a>
            </li>
            <li class="nav-item">
-             <a class="nav-link" href="#"> Friend Requests</a>
+             <a class="nav-link" href="#">  <i class="lni lni-users linkIcon"></i>Friend Requests</a>
            </li>
            <li class="nav-item">
              <a class="nav-link " href="#"> <i class="lni lni-envelope linkIcon"></i>Messages</a>
@@ -80,10 +80,10 @@
          <% photos.forEach((i)=>{ %>
             <div class="image">
                <img src="<%=i.name%>">
-               <div class="btns">
+               
                <button id='del' data-id=<%=i.id%>>Delete</button>
                <button id='set' data-id="<%=i.id%>">Set a Avatar</button>
-               </div>
+               
    
             </div>
          <%})%>

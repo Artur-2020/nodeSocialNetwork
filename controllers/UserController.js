@@ -59,6 +59,7 @@ class UserController {
                error[i.param] = i.msg
              }
            })  
+           console.log(user)
            res.render('editdata',{errors:error,user:user[0]})
         }
         else{
