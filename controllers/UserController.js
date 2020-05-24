@@ -14,7 +14,7 @@ class UserController {
            res.render('profile',{user:user[0]})
         }
         else{
-          res.redirect('/login')
+          res.redirect('/')
         }
          
      }
@@ -28,7 +28,7 @@ class UserController {
    
       }
       else{
-        res.redirect('/login')
+        res.redirect('/')
       }
     }
 
@@ -59,12 +59,11 @@ class UserController {
                error[i.param] = i.msg
              }
            })  
-           console.log(user)
            res.render('editdata',{errors:error,user:user[0]})
         }
         else{
 
-           res.redirect('/login')
+           res.redirect('/')
         }
    }     
   //  tvyalnery poxelu hamar

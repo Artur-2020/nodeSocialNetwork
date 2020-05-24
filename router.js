@@ -20,7 +20,7 @@ var storage = multer.diskStorage({   destination: function (req, file, cb) {
     var upload = multer({ storage: storage })
  
 
-router.get('/',RegController.signup)
+router.get('/',RegController.login)
 
 router.get('/profile',UserController.profile)
 router.get('/profile/edit',UserController.edit)
@@ -77,7 +77,7 @@ router.post('/signupForm',[
  ],RegController.loginForm)
 
 
- router.get('/login',RegController.login)
+ router.get('/signup',RegController.signup)
 
 
  //nkar avelacnel glxavor

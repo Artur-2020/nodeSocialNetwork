@@ -55,7 +55,7 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                  <a class="dropdown-item" href="profile/edit"> <i class="lni lni-cog"></i> Edit</a>
-                <a class="dropdown-item" href="/login"> <i class="lni lni-exit"></i> Log Out</a>
+                <a class="dropdown-item" href="/"> <i class="lni lni-exit"></i> Log Out</a>
                 <div class="dropdown-divider"></div>
               </div>
             </li>
@@ -69,7 +69,10 @@
 
   <!-- main start -->
   <div id="main">
+
     <div class="avatarInfo">
+    <!-- useri nkari hatvac -->
+
       <div class="userAvatar">
         <div class="userAvatarimage">
           <img src="<%=user.image%>" alt="">
@@ -82,6 +85,9 @@
           <p class="year"><%=user.age%> Years Old</p>
         </div>
       </div>
+      <!-- nkari hatvac end -->
+
+      <!-- friend photo link start -->
       <div class="fotoFriend">
         <ul>
           <li><a href="/photos">  <i class="lni lni-image"></i> Photos</a></li>
@@ -89,7 +95,9 @@
         </ul>
       </div>
     </div>
+    <!-- friend foto end -->
     
+    <!-- change avatar modal start -->
 	<div class="modal fade" id="changeAvatarModal" tabindex="-1" role="dialog" aria-labelledby="changeAvatarModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 		<div class="modal-content">
@@ -111,8 +119,10 @@
 		</div>
 	  </div>
 	</div>
+  <!-- change avatar modal end -->
 	
 
   </div>
+  <!-- main end -->
 </body>
 </html>
