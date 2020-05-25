@@ -109,4 +109,6 @@ router.post('/editData',[
  
  router.post('/changeAvatar',UserController.changeAvatar)
 
+ router.post('/requestCount',UserController.requestCount)
+
 module.exports = router

@@ -46,7 +46,7 @@ class RegController{
            const inputValue = req.body
            req.session.inputValue = inputValue
            req.session.validationError = errors.errors
-          res.redirect('/')
+          res.redirect('/signup')
         }
         else{
             const password=req.body.password
@@ -56,7 +56,7 @@ class RegController{
          });
          
         
-         res.redirect('/login')
+         res.redirect('/')
          
         }  
     }
@@ -66,7 +66,7 @@ class RegController{
         
            req.session.loginError = errors.errors
            
-          res.redirect('/login')
+          res.redirect('/')
         }
         else{
           

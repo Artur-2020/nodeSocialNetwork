@@ -8,7 +8,7 @@ class Model{
          host:"localhost",
          user:"root",
          password:'',
-         database:"socialnetwork"
+         database:"artsocialnetwork"
        
        }) 
        this.table=''  

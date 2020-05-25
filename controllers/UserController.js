@@ -1,5 +1,6 @@
 const userModel=require('../models/userModel')
 const photosModel = require('../models/photosModel')
+const requestModel = require('../models/requestModel')
 const {check, validationResult } = require('express-validator');
 
 
@@ -92,6 +93,13 @@ class UserController {
       userModel.update({image},{id})
       res.send('Nkary Tarmacvel e')
   
+    }
+   async requestCount(req,res){
+      let id=req.session.userId
+      let count = await requestModel.requestCount(id)
+
+      console.log(count)
+      res.send(count)
     }
        
 }
