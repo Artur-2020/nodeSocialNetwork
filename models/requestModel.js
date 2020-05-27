@@ -13,5 +13,14 @@ class RequestModel extends Model{
            })
         })
      }
+     showRequests(id){
+      return new Promise((ok,errors)=>{
+         this.connection.query(`Select * from user join request on user.id = user1_id where user2_id = ${id}  `,(error,data)=>{
+            if(error) throw error
+            ok(data)
+         })
+      })
+
+     }
 }
 module.exports = new RequestModel

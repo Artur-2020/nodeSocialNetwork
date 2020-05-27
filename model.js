@@ -8,7 +8,7 @@ class Model{
          host:"localhost",
          user:"root",
          password:'',
-         database:"artsocialnetwork"
+         database:"socialnetwork"
        
        }) 
        this.table=''  
@@ -76,7 +76,6 @@ class Model{
       // console.log(query)
       this.connection.query(query,(error,data)=>{
          if(error) throw error
-         console.log(data)
       })
       
    }
@@ -93,7 +92,6 @@ class Model{
          query+= `${i}='${con[i]}' and `
       }
       query=query.substring(0,query.length-4)
-      console.log(query)
       
       this.connection.query(query,(error,data)=>{
          if(error) throw error

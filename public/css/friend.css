@@ -1,0 +1,58 @@
+#main{
+   margin: 60px 0;
+   font-family: tahoma;
+}
+.backLink{
+   display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  background: #718BA8;
+  margin: 20px;
+  padding: 5px 15px;
+  font-size: 12px;
+  border-radius: 50px;
+  font-family: sans-serif;
+  transition: 0.5s;
+}
+#allFriends{
+   display: flex;
+   flex-wrap: wrap;
+   width: 80%;
+   margin: auto;
+   /* border: 1px solid ; */
+}
+#friendHead{
+   width: 250px;
+   margin: auto;
+}
+.friend{
+   display: flex;
+   align-items: center;
+   margin: 30px;
+   /* border: 1px solid; */
+}
+
+.friend > p{
+   margin: 0 10px;
+   font-size: 15px;
+}
+.friend > img{
+   width: 70px;
+   height: 70px;
+   object-fit: cover;
+}
+.delFriend{
+   width: 80px;
+   border-radius: 10px;
+   border: none;
+   background-color: red;
+   color:white;
+   transition: 0.5s;
+
+}
+.deleteFriend:hover{
+   opacity: 0.5;
+}
+#email{
+   display: none;
+}

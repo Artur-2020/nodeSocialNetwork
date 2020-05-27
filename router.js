@@ -23,8 +23,12 @@ var storage = multer.diskStorage({   destination: function (req, file, cb) {
 router.get('/',RegController.login)
 
 router.get('/profile',UserController.profile)
-router.get('/profile/edit',UserController.edit)
 
+router.get('/photos',UserController.photos)
+
+router.get('/edit',UserController.edit)
+
+router.get('/friend',UserController.friend)
 
 
 
@@ -101,7 +105,6 @@ router.post('/editData',[
 
  ],UserController.editdata)
 
- router.get('/photos',UserController.photos)
 
  router.post('/addPhoto',upload.single('photo'),UserController.addPhoto)
 
@@ -110,5 +113,13 @@ router.post('/editData',[
  router.post('/changeAvatar',UserController.changeAvatar)
 
  router.post('/requestCount',UserController.requestCount)
+
+ router.post('/showRequests',UserController.showRequests)
+
+ router.post('/acceptRequest',UserController.acceptRequest)
+
+ router.post('/deleteRequest',UserController.deleteRequest)
+
+ router.post('/deleteFriend',UserController.deleteFriend)
 
 module.exports = router
