@@ -122,4 +122,6 @@ router.post('/editData',[
 
  router.post('/deleteFriend',UserController.deleteFriend)
 
+ router.post('/search',UserController.search)
+
 module.exports = router

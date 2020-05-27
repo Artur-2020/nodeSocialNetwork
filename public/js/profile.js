@@ -11,6 +11,11 @@ function requerstCount(){
     })
     
 }
+requerstCount()
+
+    // setInterval(requerstCount,1000)
+
+
     //requestnery cucadrelu kod
     let drop=document.getElementById('navbarDropdown2')
     let dropMenu=document.getElementById('reqDropMenu')
@@ -92,4 +97,18 @@ function requerstCount(){
        
         
     })
-requerstCount()
+
+    document.getElementById('searchInp').addEventListener('input',search)
+
+    function search(){
+        let val = this.value
+       if(val.length!=''){
+        axios.post('/search',{val}).
+        then((result)=>{
+            console.log(result.data)
+        }).
+        catch((error)=>{
+            console.log(error)
+        })
+       }
+    }

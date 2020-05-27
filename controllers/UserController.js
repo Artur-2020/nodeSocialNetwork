@@ -152,6 +152,34 @@ class UserController {
       // friendModel.delete({})
       res.send('deleted')
     }
+  async  search(req,res){
+      let val = req.body.val
+      let data = await userModel.search(val)
+      let id = req.session.userId
+      for(let i = 0;i<data.length;i++){
+        
+        let checkFriend = await friendModel.checkFriend(id,data[i].id)
+        let checkRequest = await requestModel.ckeckRequest(id,data[i].id)
+        if(checkFriend.length==0){
+          data[i].status = 'ynker chen'
+        }
+        else{
+          data[i].status = 'ynker en'
+        }
+        if(checkRequest.length!=0){
+          if(checkRequest[0].user1_id==id){
+            data[i].status = ' es  em uxarkel'
+          }
+          else{
+            data[i].status = 'inqn e uxarkel'
+          }
+        }
+        if(data[i].id==id){
+          data[i].status = 'es em'
+        }
+      }
+      res.send(data)
+    }
        
 }
 
