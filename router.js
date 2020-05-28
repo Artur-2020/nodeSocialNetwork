@@ -124,4 +124,13 @@ router.post('/editData',[
 
  router.post('/search',UserController.search)
 
+ router.post('/sendRequest',UserController.sendRequest)
+
+ router.post('/cancelRequest',UserController.cancelRequest)
+
+ router.post('/delSearchFriend',UserController.delSearchFriend)
+
+router.post('/acceptSearchReq',UserController.acceptSearchReq)
+
+router.post('/delSearchReq',UserController.delSearchReq)
 module.exports = router

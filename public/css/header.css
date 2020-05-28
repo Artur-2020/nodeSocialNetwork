@@ -63,9 +63,133 @@ header{
 
 }
 #searchInp{
-	width: 130px;
+	width: 170px;
 	border-radius: 5px;
 	padding-left: 10px;
 	margin:5px 10px;
 	box-sizing: border-box;
 }
+
+/* sa posiki ardyunqn e */
+#searchResult{
+	position: absolute;
+	background-color: white;
+	display: none;
+	top: 80px;
+	right: 20px;
+	width: 300px;
+
+	/* padding-left: 10px; */
+	/* height: 300px; */
+	border: 1px solid #DEDFD5;
+	transition: 0.3s;
+}
+#searchResult  .searchBody{
+	display: flex;
+	width: 300px;
+	/* border: 2px solid green; */
+}
+#searchResult  .searchImage {
+	width: 30px;
+	height: 30px;
+	margin-left: 15px;
+	border-radius: 50%;
+	/* border-radius: 50%; */
+}
+#searchResult .searchName,.searchSurname{
+	margin-left: 10px;
+	font-size: 15px;
+}
+
+#searchResult .sendReq{
+	width: 80px;
+	height: 20px;
+	margin-left: 10px;
+	font-size: 10px;
+	background-color:#4A76A8 ;
+	color: white;
+	border: none;
+}
+#searchResult .delFriend{
+	width: 80px;
+	height: 20px;
+	margin-left: 10px;
+	font-size: 10px;
+	background-color:red ;
+	color: white;
+	border: none;
+
+}
+#searchResult .cancelReq{
+	width: 80px;
+	height: 20px;
+	margin-left: 10px;
+	font-size: 10px;
+	background-color:#E04949 ;
+	color: white;
+	border: none;
+
+}
+#searchResult > .searchBody > .deleteSearch{
+	background-color:red;
+	color: white;
+	width: 20px;
+	height: 20px;
+	margin-left: 10px;
+	border: none;
+}
+/* poiski ardyunq verj */
+
+#reqDropMenu .requestBody{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: auto;
+	padding: 0 15px;
+	/* border: 1px solid; */
+
+}
+#reqDropMenu .requestImage{
+	width: 50px;
+	height: 50px;
+}
+#reqDropMenu .requestName{
+	font-size: 15px;
+	margin: 0 10px;
+
+}
+#reqDropMenu .requestSurname{
+	font-size: 15px;
+	margin: 0 10px;
+
+}
+#reqDropMenu .acceptReq,#searchResult > .searchBody > .acceptSearch{
+	background-color:#718BA8;
+	color:white;
+	height: 30px;
+	width: 50px;
+	margin-left: 10px;
+	border: none;
+}	
+#reqDropMenu .delReq,#searchResult > .searchBody > .deleteSearch{
+	background-color:red;
+	color: white;
+	width: 30px;
+	height: 30px;
+	margin-left: 10px;
+	border: none;
+}
+@media screen and (max-width: 992px){
+   #searchResult{
+		top: 280px;
+		right: 120px;
+		z-index: 65;
+	}
+ }
+ @media screen and (max-width: 992px){
+   #searchResult{
+		top: 280px;
+		right: 80px;
+		z-index: 65;
+	}
+ }

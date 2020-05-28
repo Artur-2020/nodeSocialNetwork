@@ -6,6 +6,7 @@ body{
 
 
 #edit{
+   display: none;
    text-align: center;
    width: 75%;
    height: auto;

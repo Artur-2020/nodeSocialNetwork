@@ -33,5 +33,15 @@ class RequestModel extends Model{
       })
 
      }
+     cancelRequest(id1,id2){
+        let query = `Delete from ${this.table} where (user1_id=${id1} and user2_id=${id2})`
+      this.connection.query(query,(error,data)=>{
+         if(error) throw error
+         
+      })
+     
+
+
+     }
 }
 module.exports = new RequestModel

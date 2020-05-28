@@ -134,6 +134,7 @@ class UserController {
     }
     deleteRequest(req,res){
       let id = req.body.id
+      // console.log(id)
       requestModel.delete({id:req.body.id})
       res.send('deleted')
     }
@@ -148,8 +149,7 @@ class UserController {
       }
     }
     deleteFriend(req,res){
-      
-      // friendModel.delete({})
+      friendModel.delFriend(req.session.userId,req.body.id)
       res.send('deleted')
     }
   async  search(req,res){
@@ -168,7 +168,7 @@ class UserController {
         }
         if(checkRequest.length!=0){
           if(checkRequest[0].user1_id==id){
-            data[i].status = ' es  em uxarkel'
+            data[i].status = 'es em uxarkel'
           }
           else{
             data[i].status = 'inqn e uxarkel'
@@ -178,7 +178,32 @@ class UserController {
           data[i].status = 'es em'
         }
       }
+      // console.log(data)
       res.send(data)
+    }
+  async  sendRequest(req,res){
+      // console.log(req.body.id)
+      res.send('sended')
+    await  requestModel.insert({user1_id:req.session.userId,user2_id:req.body.id})
+    }
+    cancelRequest(req,res){
+      console.log(req.body.id)
+      requestModel.cancelRequest(req.session.userId,req.body.id)
+      res.send('canceled')
+    }
+    delSearchFriend(req,res){
+      console.log(req.body.id)
+      friendModel.delFriend(req.body.id,req.session.userId)
+    }
+    acceptSearchReq(req,res){
+      friendModel.insert({user1_id:req.body.id,user2_id:req.session.userId})
+      requestModel.cancelRequest(req.body.id,req.session.userId)
+
+      res.send('accepted')
+    }
+    delSearchReq(req,res){
+      requestModel.cancelRequest(req.body.id,req.session.userId)
+      res.send('deleted')
     }
        
 }
