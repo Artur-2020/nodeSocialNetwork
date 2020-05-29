@@ -9,6 +9,7 @@ body{
 
 /* useravatar  */
 #main{
+	border: 1px solid;
 	background-color: #EDEEF0;
 
 }
@@ -21,6 +22,12 @@ body{
 	padding: 20px 10px;
 	height: 400px;
 	/* border: 2px solid; */
+}
+
+#posts{
+	width: 500px;
+	height: 200px;
+	border: 2px solid green;
 }
 .fotoFriend{
 	
@@ -41,6 +48,7 @@ body{
 	color: #718BA8;
 }
 .info{
+	/* border: 1px solid black; */
 	margin: 15px 0;
 	font-family: bold;
 }

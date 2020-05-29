@@ -2,6 +2,7 @@ const userModel=require('../models/userModel')
 const photosModel = require('../models/photosModel')
 const requestModel = require('../models/requestModel')
 const friendModel = require('../models/friendModel')
+const postsModel = require('../models/postsModel')
 const fs =  require('fs');
 const {check, validationResult } = require('express-validator');
 
@@ -204,6 +205,25 @@ class UserController {
     delSearchReq(req,res){
       requestModel.cancelRequest(req.body.id,req.session.userId)
       res.send('deleted')
+    }
+   async publicPost(req,res){
+      // console.log(req.file.filename)
+      let image ="image/"+ req.file.filename
+      // console.log(req.body.postText)
+     await postsModel.insert({text:req.body.postText,user_id:req.session.userId,image:image})
+     res.redirect('/profile') 
+    }
+     async showPosts(req,res){
+        if(req.session.userId){
+          
+        let posts = await postsModel.find({user_id:req.session.userId})
+        console.log(posts)
+        res.render('posts',{posts})
+      }
+      else{
+        res.redirect('/')
+      }
+      
     }
        
 }

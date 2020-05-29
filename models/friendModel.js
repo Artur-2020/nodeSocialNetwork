@@ -39,6 +39,19 @@ class FriendModel extends Model{
          })
 
     }
+    findFriendPost(id){
+        return new Promise((ok,errors)=>{
+            let query = ` select * from user join posts on user.id=posts.user_id where user.id in 
+            (Select user2_id from friend where user1_id = 75 union Select user1_id from friend where user2_id = 75)`
+            this.connection.query(query,(error,data)=>{
+               if(error) throw error
+               ok(data)
+            })
+         })
+
+        
+
+    }
 
 }
 

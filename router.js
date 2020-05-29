@@ -30,6 +30,8 @@ router.get('/edit',UserController.edit)
 
 router.get('/friend',UserController.friend)
 
+router.get('/myPosts',UserController.showPosts)
+
 
 
 // grancvelu validacia
@@ -133,4 +135,6 @@ router.post('/editData',[
 router.post('/acceptSearchReq',UserController.acceptSearchReq)
 
 router.post('/delSearchReq',UserController.delSearchReq)
+
+router.post('/publicPosts',upload.single('image'),UserController.publicPost)
 module.exports = router

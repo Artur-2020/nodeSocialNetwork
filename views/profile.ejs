@@ -42,9 +42,22 @@
         <ul>
           <li><a href="/photos">  <i class="lni lni-image"></i> Photos</a></li>
           <li><a href="/friend"> <i class="lni lni-users"></i> Friends</a></li>
+          <li><a href="/myPosts">Posts</a></li>
         </ul>
       </div>
+
+      <!-- posteri bajin -->
+      <div id="posts">
+        <form action="/publicPosts" method="post"  enctype="multipart/form-data">
+          <textarea name="postText" id="postMain" cols="60" rows="5"></textarea>  
+          <input type="file" name="image" id="postImage"> 	
+          <button class="post">Post</button>   	
+             
+        </form>
+      </div>
     </div>
+    <!-- posteri bajin verj -->
+    
     <!-- friend foto end -->
     
     <!-- change avatar modal start -->
