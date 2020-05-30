@@ -107,6 +107,26 @@ router.post('/editData',[
 
  ],UserController.editdata)
 
+ router.post('/changePassword',[
+  check('oldPassword').notEmpty().withMessage(' dashty datark e lracreq'),
+  check('newPassword').notEmpty().withMessage(' dashty datark e lracreq'),
+  check('oldPassword').custom( async (value,{req})   => {
+    var user=await userModel.find({id:req.session.userId})
+   let flag =  (bcrypt.compareSync(value, user[0].password ))
+   if(!flag){
+    return Promise.reject()
+  }
+   
+     
+ }).withMessage('Gaxtnabary naxkini het chi hamapatasxanum'),
+ 
+check('confirm_password').notEmpty().withMessage('fill in the confirm password field blank').custom((value, {req}) => (value === req.body.newPassword)).withMessage('The password does not match'),
+ 
+     
+ ],UserController.changePassword)
+
+
+
 
  router.post('/addPhoto',upload.single('photo'),UserController.addPhoto)
 
@@ -130,11 +150,17 @@ router.post('/editData',[
 
  router.post('/cancelRequest',UserController.cancelRequest)
 
- router.post('/delSearchFriend',UserController.delSearchFriend)
+ router.post('/deletFriend',UserController.deletFriend)
 
 router.post('/acceptSearchReq',UserController.acceptSearchReq)
 
 router.post('/delSearchReq',UserController.delSearchReq)
 
 router.post('/publicPosts',upload.single('image'),UserController.publicPost)
+
+router.post('/addComment',UserController.addComment)
+
+router.post('/showPostComments',UserController.showPostComments)
+
+
 module.exports = router

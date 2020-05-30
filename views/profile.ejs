@@ -25,13 +25,13 @@
 
       <div class="userAvatar">
         <div class="userAvatarimage">
-          <img src="<%=user.image%>" alt="">
+          <img id="userImage" src="<%=user.image%>" alt="">
         </div>
         <div class="changeAvatar">
           <button class="changeBtn" id="myBtn" data-toggle="modal" data-target="#changeAvatarModal">Change Avatar</button>
         </div>
         <div class="info">
-          <p><%=user.name%> <%=user.surname%></p>
+          <p><span id="userName"><%=user.name%></span><span id="userSurname"><%=user.surname%></span> </p>
           <p class="year"><%=user.age%> Years Old</p>
         </div>
       </div>
@@ -42,7 +42,7 @@
         <ul>
           <li><a href="/photos">  <i class="lni lni-image"></i> Photos</a></li>
           <li><a href="/friend"> <i class="lni lni-users"></i> Friends</a></li>
-          <li><a href="/myPosts">Posts</a></li>
+          <li><a href="/myPosts"> <i class="lni lni-pencil"></i>Posts</a></li>
         </ul>
       </div>
 
@@ -50,12 +50,13 @@
       <div id="posts">
         <form action="/publicPosts" method="post"  enctype="multipart/form-data">
           <textarea name="postText" id="postMain" cols="60" rows="5"></textarea>  
-          <input type="file" name="image" id="postImage"> 	
+          <input type="file" name="image" id="postImage" style="display: none;">	
+          <i id="postImageIcon" class="lni lni-image " onclick="postImage.click()"></i>
           <button class="post">Post</button>   	
              
         </form>
       </div>
-    </div>
+      
     <!-- posteri bajin verj -->
     
     <!-- friend foto end -->
@@ -84,12 +85,74 @@
 	</div>
   <!-- change avatar modal end -->
 	
-
+ 
   </div>
   <!-- main end -->
+  <div id="showPosts">
+    
+      <% UserPosts.forEach((i)=>{ %>
+          <div class="postMain">
+            <div class="authorPost">
+              <img src="<%=user.image%>" alt="">
+              <p><%=user.name%> <%=user.surname%> </p>
+
+            </div>
+              <div class="postText">
+                <p><%=i.text%></p>
+              </div>
+             <img class="postImg" src="<%=i.picture%>">
+             <div class="postBtns">
+              <button>Like</button>
+              <button class="showComments" data-id=<%=i.id%>>Comment</button>
+            </div>
+ 
+            <div class="commentMain">
+ 
+            </div>
+            <div class="commentNow">
+
+            </div>
+            <div class="sendComment">
+              <input class="comText" type="text" >
+              <button class="addComment" data-id = <%=i.id%>>Send</button>
+            </div>
+          </div>
+       <%})%>
+
+       <% FriendPosts.forEach((i)=>{ %>
+        <div class="postMain">
+          <div class="authorPost">
+            <img src="<%=i.image%>" alt="">
+            <p><%=i.name%> <%=i.surname%> </p>
+
+          </div>
+            <div class="postText">
+              <p><%=i.text%></p>
+            </div>
+           <img class="postImg" src="<%=i.picture %>">
+           <div class="postBtns">
+             <button data-id =45 >Like</button>
+             <button class="showComments" data-id=<%=i.id%> >Comment</button>
+           </div>
+
+           <div class="commentMain">
+
+           </div>
+           <div class="commentNow">
+             
+          </div>
+           <div class="sendComment">
+             <input class="comText" type="text" >
+             <button class="addComment"  data-id = <%=i.id%>>Send</button>
+           </div>
+        </div>
+     <%})%>
+  </div>
+    
+  
 </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
-  <!-- <script src="js/profile.js"></script> -->
+  <script src="js/profile.js"></script>
   
   
 </html>

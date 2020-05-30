@@ -7,11 +7,14 @@
     <link rel="stylesheet" href="css/posts.css">
 </head>
 <body>
+    <header>
+     <%-include( './partials/header',{user:user})%>
+    </header>
     <div id="allPosts">
         <% posts.forEach((i)=>{ %>
             <div class="post">
                 <p><%=i.text%></p>
-               <img src="<%=i.image%>">
+               <img src="<%=i.picture%>">
             </div>
          <%})%>
     </div>

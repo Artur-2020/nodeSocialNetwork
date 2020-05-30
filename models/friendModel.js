@@ -17,7 +17,7 @@ class FriendModel extends Model{
             })
          })
     }
-    delFriend(id1,id2){
+    deletFriend(id1,id2){
         return new Promise((ok,errors)=>{
             let query = ` Delete  from ${this.table} where (user1_id=${id1} and user2_id=${id2})
             or (user1_id=${id2} and user2_id=${id1})`
@@ -42,16 +42,18 @@ class FriendModel extends Model{
     findFriendPost(id){
         return new Promise((ok,errors)=>{
             let query = ` select * from user join posts on user.id=posts.user_id where user.id in 
-            (Select user2_id from friend where user1_id = 75 union Select user1_id from friend where user2_id = 75)`
+            (Select user2_id from friend where user1_id = ${id} union Select user1_id from friend where user2_id = ${id})
+            ORDER BY posts.id desc`
             this.connection.query(query,(error,data)=>{
                if(error) throw error
                ok(data)
             })
          })
-
+        }
+        
         
 
-    }
+    
 
 }
 

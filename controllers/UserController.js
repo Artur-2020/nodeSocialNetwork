@@ -3,8 +3,12 @@ const photosModel = require('../models/photosModel')
 const requestModel = require('../models/requestModel')
 const friendModel = require('../models/friendModel')
 const postsModel = require('../models/postsModel')
+const commentsModel = require('../models/commentsModel')
+
 const fs =  require('fs');
 const {check, validationResult } = require('express-validator');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 
 
@@ -21,7 +25,13 @@ class UserController {
              user[0].image='image/avatar.png'
            }
            req.session.userInfo = user[0]
-           res.render('profile',{user:user[0]})
+
+          let UserPosts = await postsModel.findPost(req.session.userId)
+          // console.log(posts)
+          let FriendPosts = await friendModel.findFriendPost(req.session.userId)
+          // console.log(FriendPosts)
+
+           res.render('profile',{user:user[0],UserPosts,FriendPosts})
            
         }
         else{
@@ -63,15 +73,25 @@ class UserController {
        edit(req,res){
          if(req.session.userId){
             
+          let passwordError={}
+           let infoError={}
+           if(req.session.editError){
+            req.session.editError.forEach((i)=>{
+              if(infoError[i.param]==undefined){
+                Infoerror[i.param] = i.msg
+              }
+            })  
+           }
+           else if(req.session.changePassError){
+            req.session.changePassError.forEach((i)=>{
+              if(passwordError[i.param]==undefined){
+                passwordError[i.param] = i.msg
+              }
+            }) 
+
+           }
           
-           let error={}
-           if(req.session.editError)
-           req.session.editError.forEach((i)=>{
-             if(error[i.param]==undefined){
-               error[i.param] = i.msg
-             }
-           })  
-           res.render('editdata',{errors:error,user:req.session.userInfo})
+           res.render('editdata',{editerrors:infoError,passerrors:passwordError,user:req.session.userInfo})
         }
         else{
 
@@ -88,6 +108,28 @@ class UserController {
        }
        else{
          userModel.update({name:req.body.name,surname:req.body.surname,age:req.body.age,email:req.body.email},{id:req.session.userId})
+         res.redirect('/profile')
+    
+        }
+    } 
+    changePassword(req,res){
+      const errors = validationResult(req)
+       if (!errors.isEmpty()) {
+         console.log(errors.errors)
+          
+          req.session.changePassError = errors.errors
+         res.redirect('/edit')
+       }
+       else{
+        
+
+        const password=req.body.newPassword
+        bcrypt.hash(password, saltRounds,   function(err, hash) {
+         userModel.update({password:hash},{id:req.session.userId})
+
+        
+      });
+      
          res.redirect('/profile')
     
         }
@@ -150,7 +192,7 @@ class UserController {
       }
     }
     deleteFriend(req,res){
-      friendModel.delFriend(req.session.userId,req.body.id)
+      friendModel.deletFriend(req.session.userId,req.body.id)
       res.send('deleted')
     }
   async  search(req,res){
@@ -192,9 +234,10 @@ class UserController {
       requestModel.cancelRequest(req.session.userId,req.body.id)
       res.send('canceled')
     }
-    delSearchFriend(req,res){
+    deletFriend(req,res){
       console.log(req.body.id)
-      friendModel.delFriend(req.body.id,req.session.userId)
+      friendModel.deletFriend(req.body.id,req.session.userId)
+      res.send('deleted')
     }
     acceptSearchReq(req,res){
       friendModel.insert({user1_id:req.body.id,user2_id:req.session.userId})
@@ -210,20 +253,28 @@ class UserController {
       // console.log(req.file.filename)
       let image ="image/"+ req.file.filename
       // console.log(req.body.postText)
-     await postsModel.insert({text:req.body.postText,user_id:req.session.userId,image:image})
+     await postsModel.insert({text:req.body.postText,user_id:req.session.userId,picture:image})
      res.redirect('/profile') 
     }
      async showPosts(req,res){
         if(req.session.userId){
           
         let posts = await postsModel.find({user_id:req.session.userId})
-        console.log(posts)
-        res.render('posts',{posts})
+        // console.log(posts)
+        res.render('posts',{posts,user:req.session.userInfo})
       }
       else{
         res.redirect('/')
       }
       
+    }
+    async addComment(req,res){
+     await commentsModel.insert({comment:req.body.text,post_id:req.body.post_id,user_id:req.session.userId})
+      res.send('added')
+    }
+    async showPostComments(req,res){
+      let comments =  await commentsModel.findPostComment(req.body.id)
+      res.send(comments)
     }
        
 }

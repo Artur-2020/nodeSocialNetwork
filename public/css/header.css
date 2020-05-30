@@ -78,9 +78,11 @@ header{
 	top: 80px;
 	right: 20px;
 	width: 300px;
+	overflow-y: scroll;
+	overflow-x: hidden;
 
 	/* padding-left: 10px; */
-	/* height: 300px; */
+	height: 300px;
 	border: 1px solid #DEDFD5;
 	transition: 0.3s;
 }
@@ -110,7 +112,7 @@ header{
 	color: white;
 	border: none;
 }
-#searchResult .delFriend{
+#searchResult .deletFriend{
 	width: 80px;
 	height: 20px;
 	margin-left: 10px;
@@ -130,14 +132,22 @@ header{
 	border: none;
 
 }
-#searchResult > .searchBody > .deleteSearch{
+#searchResult > .searchBody  .deleteSearch{
 	background-color:red;
 	color: white;
-	width: 20px;
-	height: 20px;
+	width: 30px;
+	height: 30px;
 	margin-left: 10px;
 	border: none;
 }
+#searchResult > .searchBody  .acceptSearch{
+	background-color:#718BA8;
+	color:white;
+	height: 30px;
+	width: 50px;
+	margin-left: 10px;
+	border: none;
+}	
 /* poiski ardyunq verj */
 
 #reqDropMenu .requestBody{
@@ -163,7 +173,7 @@ header{
 	margin: 0 10px;
 
 }
-#reqDropMenu .acceptReq,#searchResult > .searchBody > .acceptSearch{
+#reqDropMenu .acceptReq{
 	background-color:#718BA8;
 	color:white;
 	height: 30px;
@@ -171,7 +181,7 @@ header{
 	margin-left: 10px;
 	border: none;
 }	
-#reqDropMenu .delReq,#searchResult > .searchBody > .deleteSearch{
+#reqDropMenu .delReq{
 	background-color:red;
 	color: white;
 	width: 30px;

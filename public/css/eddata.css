@@ -4,7 +4,10 @@ body{
    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-
+#main{
+   display: flex;
+   flex-wrap: wrap;
+}
 #edit{
    /* display: none; */
    text-align: center;
@@ -15,6 +18,7 @@ body{
    margin: auto;
    box-sizing: border-box;
 }
+
 form{
    background-color: white;
    /* background: transparent; */
@@ -23,16 +27,16 @@ form{
    width: 50%;
    /* border: 2px solid red; */
 }
-#edit > form > label{
+form  label{
    display: block;
    font-size: 20px;
 }
-#edit > form > input{
+form  input{
    padding: 10px;
    transition: 0.3s;
    border-radius: 14px;
 }
-#edit > form > input:hover{
+form> input:hover{
    background-color:#D2D3D5;
    
 }
@@ -57,8 +61,31 @@ form{
 .editBtn:hover{
    opacity: 0.8;
 }
+
+.active:hover{
+	color: black;
+}
+#editHead{
+   font-weight: 400;
+}
+#changeMenu{
+   /* background-color:rgba(167, 208, 231, 0.5); */
+   /* opacity: 0.3; */
+   display:inline-block;
+   width: 200px;
+   height: 170px;
+   text-align: center;
+   margin: 60px;
+   padding: 10px;
+   box-shadow: 10px 10px 82px 33px rgba(208,208,208,1);
+}
+.menuItem{
+   cursor: pointer;
+}
 .backLink{
-   display: inline-block;
+   display: block;
+   width: 120px;
+   text-align: center;
   text-decoration: none;
   color: #fff;
   background: #718BA8;
@@ -69,9 +96,24 @@ form{
   font-family: sans-serif;
   transition: 0.5s;
 }
-.backLink:hover{
-	color: black;
+#passwordForm{
+   display: none;
 }
-#editHead{
-   font-weight: 400;
+.active{
+   display: block;
+   width: 160px;
+   text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background: #718BA8;
+  margin: 20px;
+  padding: 5px 5px;
+  font-size: 12px;
+  /* border-radius: 50px; */
+  font-family: sans-serif;
+  transition: 0.5s;
+}
+.icons{
+   margin: 0 5px;
+   font-size: 12px;
 }

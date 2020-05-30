@@ -16,6 +16,7 @@ function deletePhoto(){
    let id = this.dataset.id
    axios.post('/deletePhoto',{id}).
    then((result)=>{
+      
       console.log(result.data)
       this.parentElement.remove()
    }).

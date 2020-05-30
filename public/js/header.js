@@ -134,12 +134,13 @@ requerstCount()
                 btn.innerHTML='Send Request'
                 btn.setAttribute('class','sendReq')
                 div.append(btn)
+
             }
            else if(users[i].status == 'ynker en'){
                let btn = document.createElement('button')  
                 btn.dataset.id=users[i].id
                 btn.innerHTML='Delete'
-                btn.setAttribute('class','delFriend')
+                btn.setAttribute('class','deletFriend')
                 div.append(btn)
             }
             else if(users[i].status=='es em uxarkel'){
@@ -158,7 +159,9 @@ requerstCount()
                 btn2.dataset.id=users[i].id
                 btn2.innerHTML=`<i class="lni lni-close"></i>`
                 btn2.setAttribute('class','deleteSearch')
-                div.append(btn,btn2)
+                let btns = document.createElement('div')
+                btns.append(btn,btn2)
+                div.append(btns)
 
             }
             searchList.append(div)   
@@ -171,9 +174,9 @@ requerstCount()
                 for(let i = 0;i<cancelBtns.length;i++){
                     cancelBtns[i].addEventListener('click',cancelRequest)
                 }
-                let delFriendBtns = document.querySelectorAll('.delFriend') 
-                for(let i = 0;i<delFriendBtns.length;i++){
-                    delFriendBtns[i].addEventListener('click',delFriend)
+                let deletFriendBtns = document.querySelectorAll('.deletFriend') 
+                for(let i = 0;i<deletFriendBtns.length;i++){
+                    deletFriendBtns[i].addEventListener('click',deletFriend)
                 }
                 acceptSearchReqBtns = document.querySelectorAll('.acceptSearch')
                 for(let i = 0;i < acceptSearchReqBtns.length;i++){
@@ -194,10 +197,22 @@ requerstCount()
            console.log(error)
        })
        function sendRequest(){
+           let parent = this.parentElement
            let id = this.dataset.id
            axios.post('/sendRequest',{id}).
            then((result)=>{
                console.log(result.data)
+               this.remove()
+               let btn = document.createElement('button')
+               btn.dataset.id=id
+               btn.setAttribute('class','cancelReq')
+               btn.innerHTML ='Cancel Request'
+               parent.append(btn)
+               let cancelBtns =  document.querySelectorAll('.cancelReq')
+               for(let i = 0;i<cancelBtns.length;i++){
+                   cancelBtns[i].addEventListener('click',cancelRequest)
+               }
+
                
            }).
            catch((error)=>{
@@ -206,31 +221,70 @@ requerstCount()
        }
        function cancelRequest(){
             let id = this.dataset.id
+            let parent = this.parentElement
             axios.post('/cancelRequest',{id}).
             then((result)=>{
                 console.log(result.data)
+                this.remove()
+                let btn = document.createElement('button')
+                btn.dataset.id=id
+                btn.setAttribute('class','sendReq')
+                btn.innerHTML ='Send Request'
+                parent.append(btn)
+                
+                let sendBtns =  document.querySelectorAll('.sendReq')
+                for(let i = 0;i<sendBtns.length;i++){
+                     sendBtns[i].addEventListener('click',sendRequest)
+                 }
                 
             }).
             catch((error)=>{
                 console.log(error)
             })
        }
-       function delFriend(){
-           let id = this.dataset.id
-           axios.post('/delSearchFriend',{id}).
+       function deletFriend(){
+           let id=this.dataset.id
+           let parent = this.parentElement
+           
+            
+           axios.post('/deletFriend',{id}).
            then((result)=>{
                console.log(result.data)
+               this.remove()
+               let btn = document.createElement('button')
+               btn.dataset.id=id
+               btn.setAttribute('class','sendReq')
+               btn.innerHTML ='Send Request'
+               parent.append(btn)
+               
+               let sendBtns =  document.querySelectorAll('.sendReq')
+               for(let i = 0;i<sendBtns.length;i++){
+                    sendBtns[i].addEventListener('click',sendRequest)
+                }
                
            }).
            catch((error)=>{
                console.log(error)
            })
        }
+      
        function acceptSearchReq(){
+            let parent = this.parentElement
             let id = this.dataset.id
             axios.post('acceptSearchReq',{id}).
             then((result)=>{
                 console.log(result.data)
+                parent.innerHTML=''
+                let btn = document.createElement('button')
+                btn.dataset.id=id
+                btn.setAttribute('class','deletFriend')
+                btn.innerHTML ='Delete'
+                parent.append(btn)
+                
+                let deletFriendBtns = document.querySelectorAll('.deletFriend') 
+                    for(let i = 0;i<deletFriendBtns.length;i++){
+                        deletFriendBtns[i].addEventListener('click',deletFriend)
+                    }
                 
             }).
             catch((error)=>{
@@ -238,10 +292,23 @@ requerstCount()
             })
         }
         function delSearchReq(){
+            let parent = this.parentElement
             let id = this.dataset.id
             axios.post('delSearchReq',{id}).
             then((result)=>{
                 console.log(result.data)
+                parent.innerHTML=''
+                let btn = document.createElement('button')
+                btn.dataset.id=id
+                btn.setAttribute('class','sendReq')
+                btn.innerHTML ='Send Request'
+                parent.append(btn)
+                
+                let sendBtns =  document.querySelectorAll('.sendReq')
+                for(let i = 0;i<sendBtns.length;i++){
+                     sendBtns[i].addEventListener('click',sendRequest)
+                 }
+                
                 
             }).
             catch((error)=>{
