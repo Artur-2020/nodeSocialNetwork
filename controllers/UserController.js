@@ -4,6 +4,7 @@ const requestModel = require('../models/requestModel')
 const friendModel = require('../models/friendModel')
 const postsModel = require('../models/postsModel')
 const commentsModel = require('../models/commentsModel')
+const likeModel =  require('../models/likesModel')
 
 const fs =  require('fs');
 const {check, validationResult } = require('express-validator');
@@ -27,7 +28,7 @@ class UserController {
            req.session.userInfo = user[0]
 
           let UserPosts = await postsModel.findPost(req.session.userId)
-          // console.log(posts)
+          // console.log(UserPosts)
           let FriendPosts = await friendModel.findFriendPost(req.session.userId)
           // console.log(FriendPosts)
 
@@ -260,7 +261,7 @@ class UserController {
         if(req.session.userId){
           
         let posts = await postsModel.find({user_id:req.session.userId})
-        // console.log(posts)
+        console.log(posts)
         res.render('posts',{posts,user:req.session.userInfo})
       }
       else{
@@ -275,6 +276,12 @@ class UserController {
     async showPostComments(req,res){
       let comments =  await commentsModel.findPostComment(req.body.id)
       res.send(comments)
+    }
+    async like(req,res){
+      let pId = req.body.postId
+      let insid = await likeModel.insert({post_id:pId})
+      // delId = insid
+      res.send(`${insid}`)
     }
        
 }

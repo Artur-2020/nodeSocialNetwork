@@ -9,7 +9,7 @@ class PostsModel extends Model{
       
 
         let query =` Select * from posts where user_id = ${id} order by(posts.id) desc  `
-         console.log(id,query)
+         // console.log(id,query)
        
         
         

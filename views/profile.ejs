@@ -19,137 +19,151 @@
 
   <!-- main start -->
   <div id="main">
-
-    <div class="avatarInfo">
-    <!-- useri nkari hatvac -->
-
-      <div class="userAvatar">
-        <div class="userAvatarimage">
-          <img id="userImage" src="<%=user.image%>" alt="">
+    <div class="container">
+      <div class="avatarInfo">
+      <!-- useri nkari hatvac -->
+  
+        <div class="userAvatar">
+          <div class="userAvatarimage">
+            <img id="userImage" src="<%=user.image%>" alt="">
+          </div>
+          <div class="changeAvatar">
+            <button class="changeBtn" id="myBtn" data-toggle="modal" data-target="#changeAvatarModal">Change Avatar</button>
+          </div>
+          <div class="info">
+            <p><span id="userName"><%=user.name%></span><span id="userSurname"><%=user.surname%></span> </p>
+            <p class="year"><%=user.age%> Years Old</p>
+          </div>
+          <!-- friend photo link start -->
+          <div class="fotoFriend">
+            <ul>
+              <li><a href="/photos">  <i class="lni lni-image"></i> Photos</a></li>
+              <li><a href="/friend"> <i class="lni lni-users"></i> Friends</a></li>
+              <li><a href="/myPosts"> <i class="lni lni-pencil"></i>Posts</a></li>
+            </ul>
+          </div>
         </div>
-        <div class="changeAvatar">
-          <button class="changeBtn" id="myBtn" data-toggle="modal" data-target="#changeAvatarModal">Change Avatar</button>
+        <!-- nkari hatvac end -->
+  
+        <!-- friend photo link start -->
+        
+  
+        <!-- posteri bajin -->
+        <div id="posts">
+          <form action="/publicPosts" method="post"  enctype="multipart/form-data">
+            <textarea name="postText" id="postMain" placeholder="Post"></textarea>  
+            <input type="file" name="image" id="postImage" style="display: none;">	
+            <div class="post_btns">
+              <i id="postImageIcon" class="lni lni-image " onclick="postImage.click()"></i>
+              <button class="post">Publish</button>
+            </div>
+               
+          </form>
         </div>
-        <div class="info">
-          <p><span id="userName"><%=user.name%></span><span id="userSurname"><%=user.surname%></span> </p>
-          <p class="year"><%=user.age%> Years Old</p>
-        </div>
-      </div>
-      <!-- nkari hatvac end -->
-
-      <!-- friend photo link start -->
-      <div class="fotoFriend">
-        <ul>
-          <li><a href="/photos">  <i class="lni lni-image"></i> Photos</a></li>
-          <li><a href="/friend"> <i class="lni lni-users"></i> Friends</a></li>
-          <li><a href="/myPosts"> <i class="lni lni-pencil"></i>Posts</a></li>
-        </ul>
-      </div>
-
-      <!-- posteri bajin -->
-      <div id="posts">
-        <form action="/publicPosts" method="post"  enctype="multipart/form-data">
-          <textarea name="postText" id="postMain" cols="60" rows="5"></textarea>  
-          <input type="file" name="image" id="postImage" style="display: none;">	
-          <i id="postImageIcon" class="lni lni-image " onclick="postImage.click()"></i>
-          <button class="post">Post</button>   	
-             
-        </form>
-      </div>
+        
+      <!-- posteri bajin verj -->
       
-    <!-- posteri bajin verj -->
+      <!-- friend foto end -->
+      
+      <!-- change avatar modal start -->
+    <div class="modal fade" id="changeAvatarModal" tabindex="-1" role="dialog" aria-labelledby="changeAvatarModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="changeAvatarModalLabel">Change Avatar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+        <form method="post" action="/uploadImage" enctype="multipart/form-data"> 
+          <input type="file" name="image" id="avatarInp"> 	
+          <button class="modalChange">Change</button>   	
+        </form>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+    </div>
+    <!-- change avatar modal end -->
     
-    <!-- friend foto end -->
-    
-    <!-- change avatar modal start -->
-	<div class="modal fade" id="changeAvatarModal" tabindex="-1" role="dialog" aria-labelledby="changeAvatarModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-		<div class="modal-content">
-		  <div class="modal-header">
-			<h5 class="modal-title" id="changeAvatarModalLabel">Change Avatar</h5>
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			  <span aria-hidden="true">&times;</span>
-			</button>
-		  </div>
-		  <div class="modal-body">
-			<form method="post" action="/uploadImage" enctype="multipart/form-data"> 
-				<input type="file" name="image" id="avatarInp"> 	
-				<button class="modalChange">Change</button>   	
-			</form>
-		  </div>
-		  <div class="modal-footer">
-			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		  </div>
-		</div>
-	  </div>
-	</div>
-  <!-- change avatar modal end -->
-	
- 
-  </div>
-  <!-- main end -->
-  <div id="showPosts">
-    
-      <% UserPosts.forEach((i)=>{ %>
+   
+    </div>
+    <!-- main end -->
+    <div id="showPosts">
+  
+  
+     
+        <% UserPosts.forEach((i)=>{ %>
+            <div class="postMain">
+              <div class="authorPost">
+                <div class="user_info">
+                  <img src="<%=user.image%>" alt="">
+                  <div>
+                    <p><%=user.name%> <%=user.surname%> </p>
+                  </div>
+                </div>
+              </div>
+                <div class="postText">
+                  <p><%=i.text%></p>
+                </div>
+               <img class="postImg" src="<%=i.picture%>">
+               <div class="postBtns">
+                <button class="like" data-id=<%=i.id%>><i class="lni lni-heart"></i> Like</button>
+                <button class="showComments" data-id=<%=i.id%>><i class="lni lni-bubble"></i> Comment</button>
+              </div>
+   
+              <div class="commentMain">
+   
+              </div>
+              <div class="commentNow">
+  
+              </div>
+              <div class="sendComment">
+                <input class="comText" type="text" >
+                <button class="addComment" data-id = <%=i.id%>>Send</button>
+              </div>
+            </div>
+         <%})%>
+  
+         <% FriendPosts.forEach((i)=>{ %>
           <div class="postMain">
             <div class="authorPost">
-              <img src="<%=user.image%>" alt="">
-              <p><%=user.name%> <%=user.surname%> </p>
-
-            </div>
+              <div class="user_info">
+                  <img src="<%=i.image%>" alt="">
+                  <div>
+                    <p><%=i.name%> <%=i.surname%> </p>
+                  </div>
+                </div>
+              </div>
               <div class="postText">
                 <p><%=i.text%></p>
               </div>
-             <img class="postImg" src="<%=i.picture%>">
+             <img class="postImg" src="<%=i.picture %>">
              <div class="postBtns">
-              <button>Like</button>
-              <button class="showComments" data-id=<%=i.id%>>Comment</button>
+              <button class="like" data-id=<%=i.id%><i class="lni lni-heart"></i> Like</button>
+              <button class="showComments" data-id=<%=i.id%>><i class="lni lni-bubble"></i> Comment</button>
             </div>
- 
-            <div class="commentMain">
- 
+  
+             <div class="commentMain">
+  
+             </div>
+             <div class="commentNow">
+               
             </div>
-            <div class="commentNow">
-
-            </div>
-            <div class="sendComment">
-              <input class="comText" type="text" >
-              <button class="addComment" data-id = <%=i.id%>>Send</button>
-            </div>
+             <div class="sendComment">
+               <input class="comText" type="text" >
+               <button class="addComment"  data-id = <%=i.id%>>Send</button>
+             </div>
           </div>
        <%})%>
+    </div>
 
-       <% FriendPosts.forEach((i)=>{ %>
-        <div class="postMain">
-          <div class="authorPost">
-            <img src="<%=i.image%>" alt="">
-            <p><%=i.name%> <%=i.surname%> </p>
-
-          </div>
-            <div class="postText">
-              <p><%=i.text%></p>
-            </div>
-           <img class="postImg" src="<%=i.picture %>">
-           <div class="postBtns">
-             <button data-id =45 >Like</button>
-             <button class="showComments" data-id=<%=i.id%> >Comment</button>
-           </div>
-
-           <div class="commentMain">
-
-           </div>
-           <div class="commentNow">
-             
-          </div>
-           <div class="sendComment">
-             <input class="comText" type="text" >
-             <button class="addComment"  data-id = <%=i.id%>>Send</button>
-           </div>
-        </div>
-     <%})%>
-  </div>
+    </div>
     
-  
+  </div>
 </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
   <script src="js/profile.js"></script>

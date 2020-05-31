@@ -19,7 +19,7 @@ function showComments(){
 
    axios.post('/showPostComments',{id}).
       then((result)=>{
-         // console.log(result.data)
+         console.log(result.data)
          // comments.innerHTML=''
          for(let i = 0;i<result.data.length;i++){
             let commentAuthor = document.createElement('div')
@@ -64,7 +64,7 @@ function closComments(){
    comments.style = `display:none;`
    this.remove()
    let btn = document.createElement('button')
-   btn.innerHTML=`<i class="lni lni-bubble"></i> Comment`
+   btn.innerHTML='Comments'
    btn.setAttribute('class','showComments')
    parent.append(btn)
    let showbtns = document.querySelectorAll('.showComments')
@@ -110,39 +110,4 @@ function addComment(){
    catch((error)=>{
       console.log(error)
    })
-}
-
-let likeBtns =  document.querySelectorAll('.like')
-
-for(let i = 0;i<likeBtns.length;i++){
-   likeBtns[i].addEventListener('click',like)
-}
-
-function like(){
-   let parent = this.parentElement
-   let id = this.getAttribute('data-id')
-   // console.log(id)
-   axios.post('/like',{postId:id}).
-   then((result)=>{
-      this.remove()
-      console.log(result.data)
-      let btn = document.createElement('button')
-      btn.innerHTML=`<i class="lni lni-heart"></i> Like`
-      btn.setAttribute('class','dislike')
-      btn.dataset.id=result.data
-      parent.append(btn)
-   }).
-   catch((error)=>{
-      console.log(error)
-   })
-   let dislikeBtns =  document.querySelectorAll('.dislike')
-
-      for(let i = 0;i<dislikeBtns.length;i++){
-         dislikeBtns[i].addEventListener('click',dislike)
-      }
-
-}
-function dislike(){
-   let id =+ this.getAttribute('data-id')
-   console.log(id)
 }

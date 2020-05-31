@@ -1,15 +1,141 @@
-
-#allPosts{
+#showPosts{
+    /* text-align: center; */
     display: flex;
+    flex-wrap: wrap;
     width: 70%;
     margin: auto;
-    border: 2px solid;
+    /* border: 2px solid; */
 }
 
-.post > img{
-    width: 300px;
-    height: 300px;
+#showPosts > .postMain > .postImg{
+    /* text-align: center; */
+    width: 100%;
+    margin: auto;
+    height: 450px;
+    object-fit: contain;
 }
-.post{
-    border: 1px solid;
+.postMain{
+    margin: 20px 0;
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #d6d6d6;
+    border-radius: 10px;
+    background: #fff;
+}
+
+#showPosts > .postMain > .postText{
+    text-align: left;
+    /* width: 90%; */
+    padding: 10px;
+    margin: auto;
+    margin-top: 30px;
+    font-size: 18px;
+    background-color: rgba(219, 219, 219, 0.226);
+    /* height: 100px; */
+    /* border: 3px green; */
+}
+
+#showPosts > .postMain > .commentMain{
+    display: none;
+    width: 60%;
+    height: 300px;
+    margin: auto;
+    /* margin: 15px 0; */
+    transition: 0.6s;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+    /* border: 2px solid blue; */
+}
+#showPosts > .postMain > .postBtns{
+    margin: 15px 0;
+    text-align: left;
+    padding: 10px 0;
+    border-top: 1px solid #d6d6d6;
+    /* border: 2px solid red; */
+}
+#showPosts > .postMain > .postBtns .like{
+    border: none;
+    background: transparent;
+    font-size: 18px;
+    cursor: pointer;
+    transition: .3s ease;
+}
+#showPosts > .postMain > .postBtns .like:hover{
+    color: #e74c3c;
+}
+#showPosts > .postMain > .postBtns .like:focus{
+    outline: 0;
+}
+#showPosts > .postMain > .postBtns .showComments{
+    border: none;
+    background: transparent;
+    font-size: 18px;
+    cursor: pointer;
+    transition: .3s ease;
+}
+#showPosts > .postMain > .postBtns .showComments:hover{
+    color: #3498db;
+}
+#showPosts > .postMain > .postBtns .showComments:focus{
+    outline: 0;
+}
+
+.sendComment 	input{
+    border: 1px solid #d6d6d6;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 15px;
+}
+.sendComment 	input:focus{
+    outline: 0;
+}
+.sendComment button{
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-size: 15px;
+    background: #718BA8;
+    border: 2px solid #567CA8;
+    color: #fff;
+    cursor: pointer;
+}
+.sendComment button:focus{
+    outline: 0;
+}
+#showPosts .commentNow{
+    display: none;
+    width: auto;
+    height: auto;
+    /* border: 2px solid red; */
+}
+#showPosts .commentNow  img{
+    /* display: inline; */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+
+}	
+#showPosts .commentNow > p{
+    
+    font-size: 12px;
+
+}
+#showPosts .commentNow  *{
+    margin-left: 20px;
+    
+}
+#showPosts .commentNow > .comAuthor{
+    display: flex;
+}
+.commentMain .commentAuthor{
+    display: flex;
+}
+.commentMain .commentAuthor .commentAuthorImage{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+
+}
+.commentMain .commentAuthor *{
+    margin-left: 15px;
 }

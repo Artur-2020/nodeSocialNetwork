@@ -11,7 +11,7 @@
  Target Server Version : 100138
  File Encoding         : 65001
 
- Date: 31/05/2020 03:45:50
+ Date: 01/06/2020 02:06:04
 */
 
 SET NAMES utf8mb4;
@@ -31,7 +31,7 @@ CREATE TABLE `comments`  (
   INDEX `post_id`(`post_id`) USING BTREE,
   CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of comments
@@ -56,6 +56,11 @@ INSERT INTO `comments` VALUES (17, 'aaa', 8, 84);
 INSERT INTO `comments` VALUES (18, 'ba yngers', 3, 78);
 INSERT INTO `comments` VALUES (19, 'ara lav e kyanq', 8, 84);
 INSERT INTO `comments` VALUES (20, 'aaa', 8, 84);
+INSERT INTO `comments` VALUES (21, 'kajksajk', 3, 84);
+INSERT INTO `comments` VALUES (22, 'askl', 3, 84);
+INSERT INTO `comments` VALUES (23, 'Beautifull', 9, 84);
+INSERT INTO `comments` VALUES (24, 'asa', 9, 84);
+INSERT INTO `comments` VALUES (25, 'asa', 9, 84);
 
 -- ----------------------------
 -- Table structure for friend
@@ -71,6 +76,43 @@ CREATE TABLE `friend`  (
   CONSTRAINT `friend_ibfk_1` FOREIGN KEY (`user1_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `friend_ibfk_2` FOREIGN KEY (`user2_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of friend
+-- ----------------------------
+INSERT INTO `friend` VALUES (23, 78, 84);
+INSERT INTO `friend` VALUES (24, 85, 84);
+
+-- ----------------------------
+-- Table structure for likes
+-- ----------------------------
+DROP TABLE IF EXISTS `likes`;
+CREATE TABLE `likes`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `post_id` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of likes
+-- ----------------------------
+INSERT INTO `likes` VALUES (1, 0);
+INSERT INTO `likes` VALUES (2, 0);
+INSERT INTO `likes` VALUES (3, 9);
+INSERT INTO `likes` VALUES (4, 9);
+INSERT INTO `likes` VALUES (5, 9);
+INSERT INTO `likes` VALUES (6, 9);
+INSERT INTO `likes` VALUES (7, 9);
+INSERT INTO `likes` VALUES (8, 9);
+INSERT INTO `likes` VALUES (9, 9);
+INSERT INTO `likes` VALUES (10, 8);
+INSERT INTO `likes` VALUES (11, 8);
+INSERT INTO `likes` VALUES (12, 2);
+INSERT INTO `likes` VALUES (13, 8);
+INSERT INTO `likes` VALUES (14, 4);
+INSERT INTO `likes` VALUES (15, 2);
+INSERT INTO `likes` VALUES (16, 9);
+INSERT INTO `likes` VALUES (17, 9);
 
 -- ----------------------------
 -- Table structure for photos
@@ -105,7 +147,7 @@ CREATE TABLE `posts`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of posts
@@ -116,6 +158,7 @@ INSERT INTO `posts` VALUES (4, 'asals;laslljl;ll;l;l;lhaartyrbajshjahsjayh', 'im
 INSERT INTO `posts` VALUES (6, 'sedullllllllllll', 'image/1590789924503Desert.jpg', 81);
 INSERT INTO `posts` VALUES (7, 'Aramayis', 'image/1590841299732Penguins.jpg', 84);
 INSERT INTO `posts` VALUES (8, 'Mer Ynger Valodna', 'image/1590852018387Koala.jpg', 84);
+INSERT INTO `posts` VALUES (9, 'Girl', 'image/15909572456406Xf1DuBfX5g.jpg', 84);
 
 -- ----------------------------
 -- Table structure for request
@@ -130,7 +173,7 @@ CREATE TABLE `request`  (
   INDEX `user2_id`(`user2_id`) USING BTREE,
   CONSTRAINT `request_ibfk_1` FOREIGN KEY (`user1_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `request_ibfk_2` FOREIGN KEY (`user2_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of request
