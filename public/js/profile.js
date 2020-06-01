@@ -120,7 +120,8 @@ for(let i = 0;i<likeBtns.length;i++){
 
 function like(){
    let parent = this.parentElement
-   let id = this.getAttribute('data-id')
+   let id = this.parentElement.getAttribute('data-id')
+
    // console.log(id)
    axios.post('/like',{postId:id}).
    then((result)=>{
@@ -128,21 +129,44 @@ function like(){
       console.log(result.data)
       let btn = document.createElement('button')
       btn.innerHTML=`<i class="lni lni-heart"></i> Like`
-      btn.setAttribute('class','dislike')
-      btn.dataset.id=result.data
-      parent.append(btn)
+      btn.setAttribute('class','disLike')
+      // btn.dataset.id=
+      parent.prepend(btn)
+      let disLikeBtns =  document.querySelectorAll('.disLike')
+
+      for(let i = 0;i<disLikeBtns.length;i++){
+         disLikeBtns[i].addEventListener('click',disLike)
+      }
    }).
    catch((error)=>{
       console.log(error)
    })
-   let dislikeBtns =  document.querySelectorAll('.dislike')
-
-      for(let i = 0;i<dislikeBtns.length;i++){
-         dislikeBtns[i].addEventListener('click',dislike)
-      }
+   
 
 }
-function dislike(){
-   let id =+ this.getAttribute('data-id')
-   console.log(id)
+function disLike(){
+   let parent = this.parentElement
+   let id = this.parentElement.getAttribute('data-id')
+   axios.post('/disLike',{postId:id}).
+   then((result)=>{
+   this.remove()
+
+      console.log(result.data)
+      
+   let btn = document.createElement('button')
+   btn.innerHTML=`<i class="lni lni-heart"></i> Like`
+   btn.setAttribute('class','like')
+   btn.setAttribute('data-id',id)
+   parent.prepend(btn)
+   // console.log(id)
+   let likeBtns =  document.querySelectorAll('.like')
+
+   for(let i = 0;i<likeBtns.length;i++){
+      likeBtns[i].addEventListener('click',like)
+   }
+   }).
+   catch((error)=>{
+      console.log(error)
+   })
+
 }

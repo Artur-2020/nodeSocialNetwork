@@ -164,5 +164,6 @@ router.post('/showPostComments',UserController.showPostComments)
 
 router.post('/like',UserController.like)
 
+router.post('/disLike',UserController.like)
 
 module.exports = router

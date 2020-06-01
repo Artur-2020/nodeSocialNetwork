@@ -5,6 +5,7 @@ class likesModel extends Model{
         super()
         this.table='likes'
     }
+  
 
 }
 module.exports = new likesModel

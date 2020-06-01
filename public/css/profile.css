@@ -291,6 +291,7 @@
 	}
 	#showPosts > .postMain > .postBtns .like{
 		border: none;
+		/* color: #000; */
 		background: transparent;
 		font-size: 18px;
 		cursor: pointer;
@@ -302,7 +303,7 @@
 	#showPosts > .postMain > .postBtns .like:focus{
 		outline: 0;
 	}
-	#showPosts > .postMain > .postBtns .dislike{
+	#showPosts > .postMain > .postBtns .disLike{
 		border: none;
 		color: red;
 		background: transparent;
@@ -310,10 +311,10 @@
 		cursor: pointer;
 		transition: .3s ease;
 	}
-	#showPosts > .postMain > .postBtns .dislike:hover{
+	#showPosts > .postMain > .postBtns .disLike:hover{
 		color: black;
 	}
-	#showPosts > .postMain > .postBtns .dislike:focus{
+	#showPosts > .postMain > .postBtns .disLike:focus{
 		outline: 0;
 	}
 	#showPosts > .postMain > .postBtns .showComments{

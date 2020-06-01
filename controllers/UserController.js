@@ -279,12 +279,23 @@ class UserController {
     }
     async like(req,res){
       let pId = req.body.postId
-      let insid = await likeModel.insert({post_id:pId})
+      let flag =await likeModel.find({user_id:req.session.userId,post_id:pId})
       // delId = insid
-      res.send(`${insid}`)
+      if(flag.length !=0){
+        let likeId = flag[0].id
+        likeModel.delete({id:likeId})
+      }
+      else{
+      let a = await likeModel.insert({post_id:pId,user_id:req.session.userId})
+
+      }
+      res.send('ok')
     }
+    
+   
        
 }
+
 
 module.exports = new UserController
 
