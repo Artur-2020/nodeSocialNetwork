@@ -29,11 +29,37 @@ class UserController {
 
           let UserPosts = await postsModel.findPost(req.session.userId)
           // console.log(UserPosts)
-          let FriendPosts = await friendModel.findFriendPost(req.session.userId)
-          // console.log(FriendPosts)
+          for(let i=0;i<UserPosts.length;i++){
+            let likecount = await likeModel.likeCount(UserPosts[i].id)
+            if(likecount[0]){
+               UserPosts[i].likes = likecount[0]['count']
 
+            }
+            let likedFlag = await likeModel.Liked(UserPosts[i].id,req.session.userId)
+            if(likedFlag.length==0){
+              UserPosts[i].liked = false
+            }
+            else{
+              UserPosts[i].liked = true
+            }
+          }
+          let FriendPosts = await friendModel.findFriendPost(req.session.userId)
+          for(let i=0;i<FriendPosts.length;i++){
+            let lcount = await likeModel.likeCount(FriendPosts[i].id)
+            if(lcount[0]){
+                 FriendPosts[i].likes = lcount[0]['count']
+            }
+            let likedFlag = await likeModel.Liked(FriendPosts[i].id,req.session.userId)
+            if(likedFlag.length==0){
+              FriendPosts[i].liked = false
+            }
+            else{
+              FriendPosts[i].liked = true
+            }
+          }
+          
            res.render('profile',{user:user[0],UserPosts,FriendPosts})
-           
+          
         }
         else{
           res.redirect('/')
@@ -185,7 +211,7 @@ class UserController {
     async friend(req,res){
       if(req.session.userId){
         let friends =  await friendModel.findFriend(req.session.userId)
-        // console.log(friends)
+        console.log(friends)
           res.render('friend',{user:req.session.userInfo,friends})
        }
       else{
@@ -252,16 +278,36 @@ class UserController {
     }
    async publicPost(req,res){
       // console.log(req.file.filename)
-      let image ="image/"+ req.file.filename
       // console.log(req.body.postText)
-     await postsModel.insert({text:req.body.postText,user_id:req.session.userId,picture:image})
+      if(req.file ){
+        let image ="image/"+ req.file.filename
+         await postsModel.insert({text:req.body.postText,user_id:req.session.userId,picture:image})
+
+      }
+      else{
+        await postsModel.insert({text:req.body.postText,user_id:req.session.userId})
+      }
      res.redirect('/profile') 
     }
      async showPosts(req,res){
         if(req.session.userId){
           
-        let posts = await postsModel.find({user_id:req.session.userId})
-        console.log(posts)
+          let posts = await postsModel.findPost(req.session.userId)
+          // console.log(UserPosts)
+          for(let i=0;i<posts.length;i++){
+            let likecount = await likeModel.likeCount(posts[i].id)
+            if(likecount[0]){
+               posts[i].likes = likecount[0]['count']
+
+            }
+            let likedFlag = await likeModel.Liked(posts[i].id,req.session.userId)
+            if(likedFlag.length==0){
+              posts[i].liked = false
+            }
+            else{
+              posts[i].liked = true
+            }
+          }
         res.render('posts',{posts,user:req.session.userInfo})
       }
       else{
@@ -270,11 +316,16 @@ class UserController {
       
     }
     async addComment(req,res){
-     await commentsModel.insert({comment:req.body.text,post_id:req.body.post_id,user_id:req.session.userId})
-      res.send('added')
+     if(req.body.text.length > 0){
+        await commentsModel.insert({comment:req.body.text,post_id:req.body.post_id,user_id:req.session.userId})
+        res.send('added')
+     }
+     res.send('no added')
     }
     async showPostComments(req,res){
       let comments =  await commentsModel.findPostComment(req.body.id)
+      console.log(req.body.id)
+      console.log(comments)
       res.send(comments)
     }
     async like(req,res){
@@ -291,9 +342,93 @@ class UserController {
       }
       res.send('ok')
     }
-    
-   
+    async getLikers(req,res){
+      let likers = await likeModel.getLikers(req.body.id)
+      res.send(likers)
+    }
+
+    async friendPage(req,res){
+      // console.log(req.params.id)
+      if(req.session.userId){
+     
+        var user = await userModel.find({id:req.params.id})
+       // stugum em ete useri nkarneri mej ir glxavor nkary ka cucadrum em ete chka dnum el default arjeq
+        let flagImage = await photosModel.find({name:user[0].image})
+        if(flagImage.length==0){
+          user[0].image='image/avatar.png'
+        }
+        let posts = await postsModel.findPost(req.params.id)
+          // console.log(UserPosts)
+          for(let i=0;i<posts.length;i++){
+            let likecount = await likeModel.likeCount(posts[i].id)
+            if(likecount[0]){
+               posts[i].likes = likecount[0]['count']
+
+            }
+            let likedFlag = await likeModel.Liked(posts[i].id,req.params.id)
+            if(likedFlag.length==0){
+              posts[i].liked = false
+            }
+            else{
+              posts[i].liked = true
+            }
+          }
+        res.render('friendPage',{friend:user[0],posts,user:req.session.userInfo,id:req.params.id})
        
+     }
+     else{
+       res.redirect('/')
+     }
+    }  
+    async friendFriends(req,res){
+     if(req.session.userId){
+      let friends = await friendModel.findFriend(req.params.id)
+      // console.log(friends)
+      res.render('friendFriends',{user:req.session.userInfo,friends,id:req.params.id})
+
+     }
+     else{
+       res.redirect('/')
+     }
+    }
+    async friendPhotos(req,res){
+      if(req.session.userId){
+
+        let photos = await photosModel.find({user_id:req.params.id})
+         res.render('friendPhotos',{photos,user:req.session.userInfo,id:req.params.id})
+    
+       }
+       else{
+         res.redirect('/')
+       }
+    }
+    async fPosts(req,res){
+      if(req.session.userId){
+        let friend = await userModel.find({id:req.params.id})
+        let posts = await postsModel.findPost(req.params.id)
+        // console.log(UserPosts)
+        for(let i=0;i<posts.length;i++){
+          let likecount = await likeModel.likeCount(posts[i].id)
+          if(likecount[0]){
+             posts[i].likes = likecount[0]['count']
+
+          }
+          let likedFlag = await likeModel.Liked(posts[i].id,req.session.userId)
+          if(likedFlag.length==0){
+            posts[i].liked = false
+          }
+          else{
+            posts[i].liked = true
+          }
+        }
+        console.log(friend)
+      res.render('friendPosts',{posts,user:req.session.userInfo,id:req.params.id,friend:friend[0]})
+    }
+    else{
+      res.redirect('/')
+    }
+    
+  }
 }
 
 

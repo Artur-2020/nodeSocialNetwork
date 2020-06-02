@@ -12,7 +12,7 @@
 	
 	/* useravatar  */
 	#main{
-		border: 1px solid;
+		/* border: 1px solid; */
 		background-color: #EDEEF0;
 	
 	}
@@ -311,6 +311,9 @@
 		cursor: pointer;
 		transition: .3s ease;
 	}
+	#showPosts > .postMain > .postBtns .likeCount{
+		cursor: pointer;
+	}
 	#showPosts > .postMain > .postBtns .disLike:hover{
 		color: black;
 	}
@@ -388,4 +391,19 @@
 	}
 	.commentMain .commentAuthor *{
 		margin-left: 15px;
+	}
+	#likersBody >div> .likerImg{
+		display: inline-block;
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+		object-fit: cover;
+	}
+	#likersBody > div{
+		margin-top: 15px;
+	}
+	#likersBody > div > p{
+		display: inline-block;
+		margin-left: 5px;
+		font-size: 12px;
 	}

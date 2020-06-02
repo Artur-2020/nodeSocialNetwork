@@ -123,7 +123,7 @@ requerstCount()
                 surname.setAttribute('class','searchSurname')
 
             let image = document.createElement('img')
-                image.setAttribute('src',users[i]['image'])
+                image.setAttribute('src',`../${users[i]['image']}`)
                 image.setAttribute('class','searchImage')
                  div.append(image,name,surname)
 

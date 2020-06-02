@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/posts.css">
+    <link rel="stylesheet" href="../css/posts.css">
     <link rel="stylesheet" href="https://cdn.lineicons.com/2.0/LineIcons.css">
 
 </head>
@@ -17,14 +17,14 @@
     <img src="../<%=user.image%>" id="userImage" alt="" style="display: none;">
     <p id="userName" style="display: none;"><%=user.name%></p>
     <p id="userSurname" style="display: none;"><%=user.surname%></p>
-    <div id="showPosts">
+    <div id="showPosts">   
       <% posts.forEach((i)=>{ %>
         <div class="postMain">
           <div class="authorPost">
             <div class="user_info">
-              <img src="<%=user.image%>" alt="">
+              <img src="../<%=friend.image%>" alt="">
               <div>
-                <p><%=user.name%> <%=user.surname%> </p>
+                <p><%=friend.name%> <%=friend.surname%> </p>
               </div>
             </div>
           </div>
@@ -32,7 +32,7 @@
               <p><%=i.text%></p>
             </div>
             <% if(i.picture){%>
-              <img class="postImg" src="<%=i.picture %>">
+              <img class="postImg" src="../<%=i.picture %>">
              <%}%>
            <div class="postBtns" data-id="<%=i.id%>">
             <%if(i.liked==true){%>
@@ -82,5 +82,5 @@
 
 </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
-    <script src="js/posts.js"></script>
+    <script src="../js/posts.js"></script>
 </html>

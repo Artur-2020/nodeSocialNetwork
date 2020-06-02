@@ -3,6 +3,17 @@ let showbtns = document.querySelectorAll('.showComments')
 for(let i=0;i<showbtns.length;i++){
    showbtns[i].addEventListener('click',showComments)
 }
+let disLikeBtns =  document.querySelectorAll('.disLike')
+
+for(let i = 0;i<disLikeBtns.length;i++){
+   disLikeBtns[i].addEventListener('click',disLike)
+}
+
+let likers = document.querySelectorAll('.likeCount')
+
+      for(let i = 0;i<likers.length;i++){
+         likers[i].addEventListener('click',getLikers)
+      }   
 
 function showComments(){
    this.parentElement.parentElement.querySelector('.commentNow').style = `display:none;`
@@ -19,8 +30,7 @@ function showComments(){
 
    axios.post('/showPostComments',{id}).
       then((result)=>{
-         // console.log(result.data)
-         // comments.innerHTML=''
+        
          for(let i = 0;i<result.data.length;i++){
             let commentAuthor = document.createElement('div')
                commentAuthor.setAttribute('class','commentAuthor')
@@ -39,26 +49,20 @@ function showComments(){
             commentAuthor.append(image,name,surname)
             comments.append(commentAuthor,commentText)   
 
-
          }
-
+         let closebtns=document.querySelectorAll('.closeComments')
+            for(let i=0;i<closebtns.length;i++){
+               closebtns[i].addEventListener('click',closComments)
+            }
       }).
       catch((error)=>{
          console.log(error)
-      })
-
-      let closebtns=document.querySelectorAll('.closeComments')
-         for(let i=0;i<closebtns.length;i++){
-            closebtns[i].addEventListener('click',closComments)
-         }
          
-   
-
-      
+      })      
 }
 
 function closComments(){
-
+   let id = this.parentElement.getAttribute('data-id')
    let parent = this.parentElement
    let comments = this.parentElement.parentElement.querySelector('.commentMain')
    comments.style = `display:none;`
@@ -66,6 +70,7 @@ function closComments(){
    let btn = document.createElement('button')
    btn.innerHTML=`<i class="lni lni-bubble"></i> Comment`
    btn.setAttribute('class','showComments')
+   btn.setAttribute('data-id',id)
    parent.append(btn)
    let showbtns = document.querySelectorAll('.showComments')
 
@@ -89,6 +94,7 @@ function addComment(){
    then((result)=>{
       console.log(result.data)
 
+     if(text.length>0){
       this.parentElement.querySelector('.comText').value=''
 
       let commentNow = this.parentElement.parentElement.querySelector('.commentNow')
@@ -105,38 +111,59 @@ function addComment(){
       div.append(img,name,surname)   
       commentNow.append(div,text)      
               
+     }
+     let showbtns = document.querySelectorAll('.showComments')
 
+for(let i=0;i<showbtns.length;i++){
+   showbtns[i].addEventListener('click',showComments)
+}
+   
+      
    }).
    catch((error)=>{
       console.log(error)
    })
 }
 
-let likeBtns =  document.querySelectorAll('.like')
+      let likeBtns =  document.querySelectorAll('.like')
 
-for(let i = 0;i<likeBtns.length;i++){
-   likeBtns[i].addEventListener('click',like)
-}
+      for(let i = 0;i<likeBtns.length;i++){
+         likeBtns[i].addEventListener('click',like)
+      }
+
+
 
 function like(){
+   let likeCount=this.parentElement.querySelector('.likeCount').innerHTML
    let parent = this.parentElement
    let id = this.parentElement.getAttribute('data-id')
 
-   // console.log(id)
    axios.post('/like',{postId:id}).
    then((result)=>{
+      this.parentElement.querySelector('.likeCount').remove()
+      likeCount++
       this.remove()
       console.log(result.data)
       let btn = document.createElement('button')
       btn.innerHTML=`<i class="lni lni-heart"></i> Like`
       btn.setAttribute('class','disLike')
+      let span = document.createElement('span')
+      span.setAttribute('class','likeCount')
+      span.setAttribute('data-toggle','modal')
+      span.setAttribute('data-target','#getLikersModal')
+      span.innerHTML=likeCount
       // btn.dataset.id=
-      parent.prepend(btn)
+      parent.prepend(btn,span)
       let disLikeBtns =  document.querySelectorAll('.disLike')
 
       for(let i = 0;i<disLikeBtns.length;i++){
          disLikeBtns[i].addEventListener('click',disLike)
       }
+      let likers = document.querySelectorAll('.likeCount')
+
+      for(let i = 0;i<likers.length;i++){
+         likers[i].addEventListener('click',getLikers)
+      }   
    }).
    catch((error)=>{
       console.log(error)
@@ -145,28 +172,64 @@ function like(){
 
 }
 function disLike(){
+  let likeCount = this.parentElement.querySelector('.likeCount').innerHTML
    let parent = this.parentElement
    let id = this.parentElement.getAttribute('data-id')
    axios.post('/disLike',{postId:id}).
    then((result)=>{
+   this.parentElement.querySelector('.likeCount').remove()
+   likeCount--
    this.remove()
-
-      console.log(result.data)
-      
+   
+   console.log(result.data)
    let btn = document.createElement('button')
-   btn.innerHTML=`<i class="lni lni-heart"></i> Like`
+   btn.innerHTML=` <i class="lni lni-heart"></i>Like`
    btn.setAttribute('class','like')
-   btn.setAttribute('data-id',id)
-   parent.prepend(btn)
+   let span = document.createElement('span')
+   span.setAttribute('class','likeCount')
+   span.setAttribute('data-toggle','modal')
+   span.setAttribute('data-target','#getLikersModal')
+   span.innerHTML=likeCount
+   parent.prepend(btn,span)
    // console.log(id)
    let likeBtns =  document.querySelectorAll('.like')
+      for(let i = 0;i<likeBtns.length;i++){
+         likeBtns[i].addEventListener('click',like)
+      }
+   let likers = document.querySelectorAll('.likeCount')
 
-   for(let i = 0;i<likeBtns.length;i++){
-      likeBtns[i].addEventListener('click',like)
-   }
+      for(let i = 0;i<likers.length;i++){
+         likers[i].addEventListener('click',getLikers)
+      }   
    }).
    catch((error)=>{
       console.log(error)
    })
 
 }
+
+
+ function getLikers(){
+    let id = this.parentElement.getAttribute('data-id')
+    let body = document.getElementById('likersBody')
+    axios.post('/getLikers',{id}).
+    then((result)=>{
+      let likers = result.data
+       body.innerHTML=''
+       for(let i=0;i<likers.length;i++){
+         let div = document.createElement('div')
+         let img =  document.createElement('img')
+            img.setAttribute('class','likerImg')
+            img.setAttribute('src',likers[i].image)
+         let name = document.createElement('p')
+             name.innerHTML= likers[i].name
+         let surname = document.createElement('p')
+            surname.innerHTML = likers[i].surname
+         div.append(img,name,surname)
+         body.append(div)   
+       }
+    }).
+    catch((error)=>{
+       console.log(error)
+    })
+ }  

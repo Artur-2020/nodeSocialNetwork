@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>  
+   <link rel="stylesheet" href="https://cdn.lineicons.com/2.0/LineIcons.css">
+   <link rel="stylesheet" href="../css/photos.css">
+</head>
+<body>
+    <!-- navbar start -->
+  <header>
+    <%-include( './partials/header',{user:user})%>
+   
+ </header>
+ <!-- navbar end -->
+
+  <div id="main">
+      <a href="/friend/<%=id%>" class="backLink">  Back To Profile</a>
+  
+   <div id="photos">
+      <h3 class="photosHead">Photos</h3>
+      <div id="allPhotos">
+    
+         <% photos.forEach((i)=>{ %>
+            <div class="image">
+               <img src="../<%=i.name%>">
+               
+               
+   
+            </div>
+         <%})%>
+      </div>
+   </div>
+   
+   
+  </div>
+</body>
+</html>

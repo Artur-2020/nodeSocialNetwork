@@ -4,7 +4,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Document</title>
-   <link rel="stylesheet" href="css/friend.css">
+   <link rel="stylesheet" href="../css/friend.css">
 </head>
 <body>
 
@@ -13,23 +13,20 @@
 
    </header>
    <div id="main">
-      <a href="/profile" class="backLink">  Back To Profile</a>
-      <h2 id="friendHead" >Your Friends</h2>
+      <a href="/friend/<%=id%>" class="backLink">  Back To Profile</a>
+      <h2 id="friendHead" >Friends</h2>
       <div id="allFriends">
          <% friends.forEach((i)=>{ %>
             <div class="friend">
-               <img src="<%=i.image%>" alt="">
+               <img src="../<%=i.image%>" alt="">
                <p><a href="friend/<%=i.id%>"><%=i.name%></a></p>
                <p><a href="friend/<%=i.id%>"><%=i.surname%></a></p>
-               <button class="delFriend" data-id=<%=i.id%> >Delete</button>
+               
                
             </div>
          <%})%>
       </div>
    </div>
    
-</body>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
-   <script src="js/friend.js"></script>
-   
+</body>   
 </html>

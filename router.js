@@ -28,9 +28,17 @@ router.get('/photos',UserController.photos)
 
 router.get('/edit',UserController.edit)
 
-router.get('/friend',UserController.friend)
+router.get('/friends',UserController.friend)
 
 router.get('/myPosts',UserController.showPosts)
+
+router.get('/friend/:id',UserController.friendPage)
+// ynkeroj ynkernerin tesneli hamar
+router.get('/fFriends/:id',UserController.friendFriends)
+
+router.get('/fPhotos/:id',UserController.friendPhotos)
+
+router.get('/fPosts/:id',UserController.fPosts)
 
 
 
@@ -165,5 +173,7 @@ router.post('/showPostComments',UserController.showPostComments)
 router.post('/like',UserController.like)
 
 router.post('/disLike',UserController.like)
+
+router.post('/getLikers',UserController.getLikers)
 
 module.exports = router
