@@ -34,15 +34,22 @@
             <img  src="../<%=friend.image%>" alt="">
           </div>
           <div class="info">
-            <p><span ><%=friend.name%></span><span ><%=friend.surname%></span> </p>
+            <p><span ><%=friend.name%></span> <span ><%=friend.surname%></span> </p>
             <p class="year"><%=friend.age%> Years Old</p>
+            <%if(flag=="ynker enq"){%>
+              <button data-id='<%=id%>'id='ynkerner'>Delete</button>
+              
+             <%} else {%>
+             <button id="vochYnker">Add</button>
+             <%}%>
           </div>
+
           <!-- friend photo link start -->
           <div class="fotoFriend">
             <ul>
-              <li><a href="/fPhotos/<%=id%>">  <i class="lni lni-image"></i> Photos</a></li>
-              <li><a href="/fFriends/<%=id%>"> <i class="lni lni-users"></i> Friends</a></li>
-              <li><a href="/fPosts/<%=id%>"> <i class="lni lni-pencil"></i>Posts</a></li>
+              <li><a href="/userPhotos/<%=id%>">  <i class="lni lni-image"></i> Photos</a></li>
+              <li><a href="/userFriends/<%=id%>"> <i class="lni lni-users"></i> Friends</a></li>
+              <li><a href="/userPosts/<%=id%>"> <i class="lni lni-pencil"></i>Posts</a></li>
             </ul>
           </div>
         </div>

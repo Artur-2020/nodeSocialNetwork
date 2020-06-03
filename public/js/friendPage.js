@@ -1,3 +1,26 @@
+document.getElementById('ynkerner').addEventListener('click',sendRequest)
+
+function sendRequest(){
+   let parent = this.parentElement
+   let id = this.dataset.id
+   axios.post('/sendRequest',{id}).
+   then((result)=>{
+       console.log(result.data)
+       this.remove()
+       let btn = document.createElement('button')
+       btn.dataset.id=id
+       btn.setAttribute('id','vochYnker')
+       btn.innerHTML ='Cancel Request'
+       parent.append(btn)
+      
+
+       
+   }).
+   catch((error)=>{
+       console.log(error)
+   })
+}
+
 let showbtns = document.querySelectorAll('.showComments')
 
 for(let i=0;i<showbtns.length;i++){

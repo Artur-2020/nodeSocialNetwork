@@ -279,14 +279,22 @@ class UserController {
    async publicPost(req,res){
       // console.log(req.file.filename)
       // console.log(req.body.postText)
-      if(req.file ){
+      if(req.file && req.body.postText ){
         let image ="image/"+ req.file.filename
          await postsModel.insert({text:req.body.postText,user_id:req.session.userId,picture:image})
 
       }
-      else{
+      else if(!req.body.postText){
+        let image ="image/"+ req.file.filename
+
+        await postsModel.insert({picture:image,user_id:req.session.userId})
+
+      }
+      else if(!req.file){
         await postsModel.insert({text:req.body.postText,user_id:req.session.userId})
       }
+      
+    
      res.redirect('/profile') 
     }
      async showPosts(req,res){
@@ -347,7 +355,7 @@ class UserController {
       res.send(likers)
     }
 
-    async friendPage(req,res){
+    async userPage(req,res){
       // console.log(req.params.id)
       if(req.session.userId){
      
@@ -373,36 +381,44 @@ class UserController {
               posts[i].liked = true
             }
           }
-        res.render('friendPage',{friend:user[0],posts,user:req.session.userInfo,id:req.params.id})
+          let flag
+          let friendFlag = await friendModel.checkFriend(req.params.id,req.session.userId)
+          if(friendFlag.length>0){
+             flag='ynker enq' 
+          }
+          else{
+            flag = 'ynker chenq'
+          }
+        res.render('userPage',{friend:user[0],posts,user:req.session.userInfo,flag,id:req.params.id})
        
      }
      else{
        res.redirect('/')
      }
     }  
-    async friendFriends(req,res){
+    async userFriends(req,res){
      if(req.session.userId){
       let friends = await friendModel.findFriend(req.params.id)
       // console.log(friends)
-      res.render('friendFriends',{user:req.session.userInfo,friends,id:req.params.id})
+      res.render('userFriends',{user:req.session.userInfo,friends,id:req.params.id})
 
      }
      else{
        res.redirect('/')
      }
     }
-    async friendPhotos(req,res){
+    async userPhotos(req,res){
       if(req.session.userId){
 
         let photos = await photosModel.find({user_id:req.params.id})
-         res.render('friendPhotos',{photos,user:req.session.userInfo,id:req.params.id})
+         res.render('userPhotos',{photos,user:req.session.userInfo,id:req.params.id})
     
        }
        else{
          res.redirect('/')
        }
     }
-    async fPosts(req,res){
+    async userPosts(req,res){
       if(req.session.userId){
         let friend = await userModel.find({id:req.params.id})
         let posts = await postsModel.findPost(req.params.id)
@@ -422,7 +438,7 @@ class UserController {
           }
         }
         console.log(friend)
-      res.render('friendPosts',{posts,user:req.session.userInfo,id:req.params.id,friend:friend[0]})
+      res.render('userPosts',{posts,user:req.session.userInfo,id:req.params.id,friend:friend[0]})
     }
     else{
       res.redirect('/')

@@ -14,6 +14,8 @@
     <header>
      <%-include( './partials/header',{user:user})%>
     </header>
+    <a href="profile" class="backLink">  Back To Profile</a>
+
     <img src="../<%=user.image%>" id="userImage" alt="" style="display: none;">
     <p id="userName" style="display: none;"><%=user.name%></p>
     <p id="userSurname" style="display: none;"><%=user.surname%></p>

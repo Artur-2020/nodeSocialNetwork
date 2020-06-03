@@ -32,13 +32,13 @@ router.get('/friends',UserController.friend)
 
 router.get('/myPosts',UserController.showPosts)
 
-router.get('/friend/:id',UserController.friendPage)
+router.get('/user/:id',UserController.userPage)
 // ynkeroj ynkernerin tesneli hamar
-router.get('/fFriends/:id',UserController.friendFriends)
+router.get('/userFriends/:id',UserController.userFriends)
 
-router.get('/fPhotos/:id',UserController.friendPhotos)
+router.get('/userPhotos/:id',UserController.userPhotos)
 
-router.get('/fPosts/:id',UserController.fPosts)
+router.get('/userPosts/:id',UserController.userPosts)
 
 
 

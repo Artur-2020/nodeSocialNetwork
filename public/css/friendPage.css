@@ -1,5 +1,23 @@
 
+#ynkerner{
+   width: 80px;
+	height: 20px;
+	margin-left: 10px;
+	font-size: 10px;
+	background-color:red ;
+	color: white;
+	border: none;
 
+}
+#vochYnker{
+   width: 80px;
+	height: 20px;
+	margin-left: 10px;
+	font-size: 10px;
+	background-color:#4A76A8 ;
+	color: white;
+	border: none;
+}
 #showPosts .commentNow  *{
 	
    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

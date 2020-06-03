@@ -91,14 +91,17 @@ header{
 	width: 300px;
 	/* border: 2px solid green; */
 }
-#searchResult  .searchImage {
+#searchResult .searchBody a{
+	display: flex;
+}
+#searchResult .searchBody a .searchImage {
 	width: 30px;
 	height: 30px;
 	margin-left: 15px;
 	border-radius: 50%;
 	/* border-radius: 50%; */
 }
-#searchResult .searchName,.searchSurname{
+#searchResult .searchBody a .searchName,.searchSurname{
 	margin-left: 10px;
 	font-size: 15px;
 }

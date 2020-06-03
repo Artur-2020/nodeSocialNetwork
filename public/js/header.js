@@ -113,10 +113,11 @@ requerstCount()
            for(let i = 0;i<users.length;i++){
             let div = document.createElement('div')
                 div.setAttribute('class','searchBody')
+                let a = document.createElement('a')
+                a.setAttribute('href',`/user/${users[i].id}`)
             let name = document.createElement('p')
                 name.innerHTML=users[i]['name']
                 name.setAttribute('class','searchName')
-
             let surname = document.createElement('p')
                 surname.innerHTML=users[i]['surname']
                 
@@ -125,7 +126,9 @@ requerstCount()
             let image = document.createElement('img')
                 image.setAttribute('src',`../${users[i]['image']}`)
                 image.setAttribute('class','searchImage')
-                 div.append(image,name,surname)
+                a.append(image,name,surname)
+
+                 div.append(a)
 
             if(users[i].status == 'ynker chen'){
                let btn = document.createElement('button')
