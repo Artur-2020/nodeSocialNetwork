@@ -279,6 +279,10 @@ class UserController {
    async publicPost(req,res){
       // console.log(req.file.filename)
       // console.log(req.body.postText)
+    if(!req.body.postText && !req.file){
+      res.redirect('/profile')
+    }
+
       if(req.file && req.body.postText ){
         let image ="image/"+ req.file.filename
          await postsModel.insert({text:req.body.postText,user_id:req.session.userId,picture:image})
