@@ -266,7 +266,7 @@ class UserController {
       friendModel.deletFriend(req.body.id,req.session.userId)
       res.send('deleted')
     }
-    acceptSearchReq(req,res){
+    accSearchReq(req,res){
       friendModel.insert({user1_id:req.body.id,user2_id:req.session.userId})
       requestModel.cancelRequest(req.body.id,req.session.userId)
 
@@ -389,6 +389,17 @@ class UserController {
           else{
             flag = 'ynker chenq'
           }
+
+          let checkRequest = await requestModel.ckeckRequest(req.session.userId,req.params.id)
+            
+            if(checkRequest.length!=0){
+              if(checkRequest[0].user1_id==req.session.userId){
+               flag = 'es em uxarkel'
+              }
+              else{
+                flag = 'inqn e uxarkel'
+              }
+            }
         res.render('userPage',{friend:user[0],posts,user:req.session.userInfo,flag,id:req.params.id})
        
      }

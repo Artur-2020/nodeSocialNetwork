@@ -38,7 +38,7 @@ requerstCount()
                    surname.setAttribute('class','requestSurname')
    
                let image = document.createElement('img')
-                   image.setAttribute('src',users[i]['image'])
+                   image.setAttribute('src',`../${users[i]['image']}`)
                    image.setAttribute('class','requestImage')
    
                let acceptBtn= document.createElement('button')
@@ -75,6 +75,8 @@ requerstCount()
            then((result)=>{
                console.log(result.data)
                this.parentElement.remove()
+               document.getElementById('requestCount').innerHTML--
+
            }).
            catch((error)=>{
                console.log(error)
@@ -87,6 +89,8 @@ requerstCount()
            then((result)=>{
                console.log(result.data)
                this.parentElement.remove()
+               document.getElementById('requestCount').innerHTML--
+
            }).
            catch((error)=>{
                console.log(error)
@@ -274,7 +278,7 @@ requerstCount()
        function acceptSearchReq(){
             let parent = this.parentElement
             let id = this.dataset.id
-            axios.post('acceptSearchReq',{id}).
+            axios.post('accSearchReq',{id}).
             then((result)=>{
                 console.log(result.data)
                 parent.innerHTML=''
@@ -283,6 +287,8 @@ requerstCount()
                 btn.setAttribute('class','deletFriend')
                 btn.innerHTML ='Delete'
                 parent.append(btn)
+               document.getElementById('requestCount').innerHTML--
+
                 
                 let deletFriendBtns = document.querySelectorAll('.deletFriend') 
                     for(let i = 0;i<deletFriendBtns.length;i++){
@@ -306,6 +312,8 @@ requerstCount()
                 btn.setAttribute('class','sendReq')
                 btn.innerHTML ='Send Request'
                 parent.append(btn)
+               document.getElementById('requestCount').innerHTML--
+
                 
                 let sendBtns =  document.querySelectorAll('.sendReq')
                 for(let i = 0;i<sendBtns.length;i++){

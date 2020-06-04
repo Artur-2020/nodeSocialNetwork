@@ -1,4 +1,20 @@
-document.getElementById('ynkerner').addEventListener('click',sendRequest)
+if(document.getElementById('vochYnker')){
+   document.getElementById('vochYnker').addEventListener('click',sendRequest)
+}
+
+if(document.getElementById('cancelReq')){
+   document.getElementById('cancelReq').addEventListener('click',cancelRequest)
+}
+
+if(document.getElementById('ynkerner')){
+   document.getElementById('ynkerner').addEventListener('click',deleteFriend)
+}
+if(document.getElementById('acceptReq')){
+   document.getElementById('acceptReq').addEventListener('click',acceptSearchReq)
+}
+if(document.getElementById('ignoreReq')){
+   document.getElementById('ignoreReq').addEventListener('click',delReq)
+}
 
 function sendRequest(){
    let parent = this.parentElement
@@ -9,11 +25,99 @@ function sendRequest(){
        this.remove()
        let btn = document.createElement('button')
        btn.dataset.id=id
-       btn.setAttribute('id','vochYnker')
+       btn.setAttribute('id','cancelReq')
        btn.innerHTML ='Cancel Request'
        parent.append(btn)
-      
+      document.getElementById('cancelReq').addEventListener('click',cancelRequest)
+       
+   }).
+   catch((error)=>{
+       console.log(error)
+   })
+}
 
+function cancelRequest(){
+   let id = this.dataset.id
+   let parent = this.parentElement
+   axios.post('/cancelRequest',{id}).
+   then((result)=>{
+       console.log(result.data)
+       this.remove()
+       let btn = document.createElement('button')
+       btn.dataset.id=id
+       btn.setAttribute('id','vochYnker')
+       btn.innerHTML ='Add'
+       parent.append(btn)
+       
+       document.getElementById('vochYnker').addEventListener('click',sendRequest)
+      
+       
+   }).
+   catch((error)=>{
+       console.log(error)
+   })
+}
+
+function deleteFriend(){
+   let id=this.dataset.id
+   let parent = this.parentElement
+   
+    
+   axios.post('/deletFriend',{id}).
+   then((result)=>{
+       console.log(result.data)
+       this.remove()
+       let btn = document.createElement('button')
+       btn.dataset.id=id
+       btn.setAttribute('id','vochYnker')
+       btn.innerHTML ='Add'
+       parent.append(btn)
+       document.getElementById('vochYnker').addEventListener('click',sendRequest)
+      
+       
+   }).
+   catch((error)=>{
+       console.log(error)
+   })
+}
+
+function acceptSearchReq(){
+   let parent = this.parentElement.parentElement
+   let id = this.dataset.id
+   axios.post('/acceptUser',{id}).
+   then((result)=>{
+       console.log(result.data)
+       this.parentElement.remove()
+       let btn = document.createElement('button')
+       btn.dataset.id=id
+       btn.setAttribute('id','ynkerner')
+       btn.innerHTML ='Delete'
+       parent.append(btn)
+       document.getElementById('requestCount').innerHTML--
+       document.getElementById('ynkerner').addEventListener('click',deleteFriend)
+       
+   }).
+   catch((error)=>{
+       console.log(error)
+   })
+}
+function delReq(){
+   let parent = this.parentElement.parentElement
+   let id = this.dataset.id
+   axios.post('/delSearchReq',{id}).
+   then((result)=>{
+       console.log(result.data)
+       this.parentElement.remove()
+       let btn = document.createElement('button')
+       btn.dataset.id=id
+       btn.setAttribute('id','vochYnker')
+       btn.innerHTML ='Add'
+       parent.append(btn)
+       document.getElementById('vochYnker').addEventListener('click',sendRequest)
+       document.getElementById('requestCount').innerHTML--
+       
+       
+       
        
    }).
    catch((error)=>{

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <link rel="stylesheet" href="../css/friendPage.css">
+  <link rel="stylesheet" href="../css/userPage.css">
   
  
 <link rel="stylesheet" href="https://cdn.lineicons.com/2.0/LineIcons.css">
@@ -38,10 +38,21 @@
             <p class="year"><%=friend.age%> Years Old</p>
             <%if(flag=="ynker enq"){%>
               <button data-id='<%=id%>'id='ynkerner'>Delete</button>
-              
-             <%} else {%>
+              <%}%>
+             <% if(flag=='ynker chenq') {%>
              <button id="vochYnker">Add</button>
              <%}%>
+             <% if(flag=='es em uxarkel') {%>
+              <button data-id='<%=id%>' id="cancelReq">Cancel Request</button>
+              <%}%>
+              <% if(flag=='inqn e uxarkel') {%>
+               <div id="requestBtns">
+                 <button data-id='<%=id%>'  id="acceptReq"><i class="lni lni-checkmark"></i></button>
+                  <button data-id='<%=id%>' id="ignoreReq"><i class="lni lni-close"></i></button>
+
+               </div>
+                <%}%>
+              
           </div>
 
           <!-- friend photo link start -->
@@ -133,7 +144,7 @@
       
 </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
-  <script src="../js/friendPage.js"></script>
+  <script src="../js/userPage.js"></script>
   
   
 </html>

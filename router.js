@@ -160,7 +160,9 @@ check('confirm_password').notEmpty().withMessage('fill in the confirm password f
 
  router.post('/deletFriend',UserController.deletFriend)
 
-router.post('/acceptSearchReq',UserController.acceptSearchReq)
+router.post('/accSearchReq',UserController.accSearchReq)
+
+router.post('/acceptUser',UserController.accSearchReq)
 
 router.post('/delSearchReq',UserController.delSearchReq)
 

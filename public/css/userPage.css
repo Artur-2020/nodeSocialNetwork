@@ -9,6 +9,32 @@
 	border: none;
 
 }
+#cancelReq{
+   width: 80px;
+	height: 20px;
+	margin-left: 10px;
+	font-size: 10px;
+	background-color:#E04949 ;
+	color: white;
+	border: none;
+
+}
+#ignoreReq{
+   background-color:red;
+	color: white;
+	width: 30px;
+	height: 30px;
+	margin-left: 10px;
+	border: none;
+}
+#acceptReq{
+   background-color:#718BA8;
+	color:white;
+	height: 30px;
+	width: 50px;
+	margin-left: 10px;
+	border: none;
+}
 #vochYnker{
    width: 80px;
 	height: 20px;
