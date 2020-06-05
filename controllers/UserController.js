@@ -251,8 +251,8 @@ class UserController {
       // console.log(data)
       res.send(data)
     }
-  async  sendRequest(req,res){
-      // console.log(req.body.id)
+  async sendRequest(req,res){
+      console.log(req.body.id)
       res.send('sended')
     await  requestModel.insert({user1_id:req.session.userId,user2_id:req.body.id})
     }

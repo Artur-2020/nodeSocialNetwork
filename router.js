@@ -40,6 +40,8 @@ router.get('/userPhotos/:id',UserController.userPhotos)
 
 router.get('/userPosts/:id',UserController.userPosts)
 
+router.get('/hastatel/:email',RegController.hastatel)
+
 
 
 // grancvelu validacia
