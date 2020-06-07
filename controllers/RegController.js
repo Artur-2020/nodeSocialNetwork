@@ -23,19 +23,24 @@ var transporter = nodemailer.createTransport({
 
 class RegController{
 
-    login(req,res){
+     
 
+    login(req,res){
+        let activeError = ''
         let error={}
         if(req.session.loginError)
         req.session.loginError.forEach((i)=>{
           if(error[i.param]==undefined){
             error[i.param] = i.msg
           }
-        
-        })  
-      
+        }) 
+        if(req.session.activeError){
+          activeError = req.session.activeError
+        }
+
+        // console.log(req.session.userId)
         req.session.destroy()
-         res.render('login',{errors:error})
+         res.render('login',{errors:error,activeError})
       }
       signup(req,res){
         let error={}
@@ -65,12 +70,20 @@ class RegController{
         }
         else{
             const password=req.body.password
+
            bcrypt.hash(password, saltRounds,  async function(err, hash) {
           let id  = await userModel.insert({name:req.body.name,surname:req.body.surname,age:req.body.age,email:req.body.email,password:hash})
-           const mailOptions = {
+          
+            req.session.userId=id
+          
+
+          const activehash = bcrypt.hashSync( req.body.email + id, saltRounds);
+          // console.log(req.session.userId)
+          
+          const mailOptions = {
               to: req.body.email, // list of receivers
               subject: 'eji hastatum', // Subject line
-              html: `<a href = 'http://localhost:8000/hastatel/${req.body.email}' >Sexmeq hetevyal hxumov</a>`// plain text body
+              html: `<a href = 'http://localhost:8000/hastatel/${activehash}' >Sexmeq hetevyal hxumov</a>`// plain text body
             };
             transporter.sendMail(mailOptions, function (err, info) {
               if(err)
@@ -82,12 +95,11 @@ class RegController{
          });
         
          
-        
          res.redirect('/')
          
         }  
     }
-    loginForm(req,res){
+   async loginForm(req,res){
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
         
@@ -96,13 +108,32 @@ class RegController{
           res.redirect('/')
         }
         else{
-          
-          res.redirect('profile')
+          // console.log(req.session.userId)
+          let activate = await userModel.find({id:req.session.userId})
+          if(activate[0].active==0){
+            req.session.activeError = 'activate youre email'
+            
+            res.redirect('/')
+          }
+          else{
+            res.redirect('profile')
+
+          }
         }
        }
        hastatel(req,res){
-         console.log(req.params.email)
+        //  let user = await userModel.find({id:req.session.userId })
+        // let flag = bcrypt.compareSync(user[0].email+req.session.userId, req.params[0]);
+        // if(flag){
+        //   userModel.update({active:0},{id:req.session.userId})
+        //   res.redirect('/')
+        // }
+        // else{
+        //   res.redirect('/signup')
+        // }
+        //  console.log(user)
          res.send('ok')
+         
        }
 }
 module.exports = new RegController

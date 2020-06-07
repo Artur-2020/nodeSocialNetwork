@@ -40,7 +40,7 @@ router.get('/userPhotos/:id',UserController.userPhotos)
 
 router.get('/userPosts/:id',UserController.userPosts)
 
-router.get('/hastatel/:email',RegController.hastatel)
+router.get('/hastatel/**',RegController.hastatel)
 
 
 
@@ -80,12 +80,13 @@ router.post('/signupForm',[
 
     //sa stugum e passwordi hamynknely
     else{
-      let flag =  (bcrypt.compareSync(req.body.password, user[0].password ))
-
+      let flag = (bcrypt.compareSync(req.body.password, user[0].password ))
       if(!flag){
         return Promise.reject()
       }
-      req.session.userId=user[0].id
+      req.session.userId = user[0].id
+      console.log(req.session.userId)
+
     }
      
  }).withMessage('The data is incorrectly filled in')
@@ -104,7 +105,7 @@ router.post('/signupForm',[
 router.post('/editData',[
   check('name').notEmpty().withMessage('name dashty datark e lracreq').isAlpha().withMessage(' name-y petq e menak  tar lini krkin pordzeq'),
   check('surname').notEmpty().withMessage(' surname dashty datark e lracreq').isAlpha().withMessage(' surname-y petq e menak  tar lini krkin pordzeq'),
-  check('email').notEmpty().withMessage(' email dashty lracreq datark e').isEmail().withMessage(' emaili forman sxal eiq lracrel krkin pordzeq'),
+  check('email').notEmpty().withMessage(' email dashty lracreq datark e').isEmail().withMessage('email forma is not correct'),
   check('age').notEmpty().withMessage('age dashty datark e lracreq').isNumeric().withMessage(' age-y petq e menak tiv lini krkin pordzeq'),
   check('email').custom( async (value,{req})  => {
     var user=await userModel.findEmail({email:value,id:req.session.userId})

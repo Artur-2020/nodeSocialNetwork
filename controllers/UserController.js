@@ -105,7 +105,7 @@ class UserController {
            if(req.session.editError){
             req.session.editError.forEach((i)=>{
               if(infoError[i.param]==undefined){
-                Infoerror[i.param] = i.msg
+                infoError[i.param] = i.msg
               }
             })  
            }
@@ -185,6 +185,7 @@ class UserController {
     }
    async requestCount(req,res){
       let id=req.session.userId
+      console.log(id)
       let count = await requestModel.requestCount(id)
 
       res.send(count)
@@ -355,6 +356,7 @@ class UserController {
       res.send('ok')
     }
     async getLikers(req,res){
+      console.log(req.session.userId)
       let likers = await likeModel.getLikers(req.body.id)
       res.send(likers)
     }
@@ -377,7 +379,7 @@ class UserController {
                posts[i].likes = likecount[0]['count']
 
             }
-            let likedFlag = await likeModel.Liked(posts[i].id,req.params.id)
+            let likedFlag = await likeModel.Liked(posts[i].id,req.session.userId)
             if(likedFlag.length==0){
               posts[i].liked = false
             }
