@@ -3,6 +3,8 @@ const app=express()
 const bodyParser = require('body-parser') 
 const session = require('express-session')
 const router = require('./router')
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
 
 
@@ -18,4 +20,11 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(router)
 
-app.listen(8000)
+io.on('connection', function (socket) {
+  // socket.emit('news', { hello: 'world' });
+  // socket.on('my other event', function (data) {
+  //   console.log(data);
+  // });
+});
+
+server.listen(8000)

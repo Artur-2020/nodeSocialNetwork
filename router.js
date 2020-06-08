@@ -40,7 +40,9 @@ router.get('/userPhotos/:id',UserController.userPhotos)
 
 router.get('/userPosts/:id',UserController.userPosts)
 
-router.get('/hastatel/**',RegController.hastatel)
+router.get('/hastatel/:email/**',RegController.hastatel)
+
+router.get('/chat',UserController.chat)
 
 
 

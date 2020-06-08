@@ -83,7 +83,7 @@ class RegController{
           const mailOptions = {
               to: req.body.email, // list of receivers
               subject: 'eji hastatum', // Subject line
-              html: `<a href = 'http://localhost:8000/hastatel/${activehash}' >Sexmeq hetevyal hxumov</a>`// plain text body
+              html: `<a href = 'http://localhost:8000/hastatel/${req.body.email}/${activehash}' >Sexmeq hetevyal hxumov</a>`// plain text body
             };
             transporter.sendMail(mailOptions, function (err, info) {
               if(err)
@@ -121,19 +121,19 @@ class RegController{
           }
         }
        }
-       hastatel(req,res){
-        //  let user = await userModel.find({id:req.session.userId })
-        // let flag = bcrypt.compareSync(user[0].email+req.session.userId, req.params[0]);
-        // if(flag){
-        //   userModel.update({active:0},{id:req.session.userId})
-        //   res.redirect('/')
-        // }
-        // else{
-        //   res.redirect('/signup')
-        // }
-        //  console.log(user)
-         res.send('ok')
-         
+       async hastatel(req,res){
+         let user = await userModel.find({email:req.params.email })
+        let flag = bcrypt.compareSync(user[0].email+user[0].id,req.params[0]);
+        if(flag){
+          userModel.update({active:1},{email:req.params.email})
+          res.redirect('/')
+        }
+        else{
+          res.redirect('/signup')
+        }
+        console.log(req.params.email)
+        
+        
        }
 }
 module.exports = new RegController
