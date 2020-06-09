@@ -74,16 +74,15 @@ class RegController{
            bcrypt.hash(password, saltRounds,  async function(err, hash) {
           let id  = await userModel.insert({name:req.body.name,surname:req.body.surname,age:req.body.age,email:req.body.email,password:hash})
           
-            req.session.userId=id
-          
-
+        req.session.userId=id
+        
           const activehash = bcrypt.hashSync( req.body.email + id, saltRounds);
           // console.log(req.session.userId)
           
           const mailOptions = {
               to: req.body.email, // list of receivers
-              subject: 'eji hastatum', // Subject line
-              html: `<a href = 'http://localhost:8000/hastatel/${req.body.email}/${activehash}' >Sexmeq hetevyal hxumov</a>`// plain text body
+              subject: 'activate Profile', // Subject line
+              html: `<a href = 'http://localhost:8000/hastatel/${req.body.email}/${activehash}' >Click here for activating</a>`// plain text body
             };
             transporter.sendMail(mailOptions, function (err, info) {
               if(err)
@@ -93,8 +92,6 @@ class RegController{
            });
            
          });
-        
-         
          res.redirect('/')
          
         }  

@@ -465,7 +465,7 @@ class UserController {
    async chat(req,res){
     if(req.session.userId){
       let friends = await friendModel.findFriend(req.session.userId)
-      res.render('chat',{friends})
+      res.render('chat',{friends,user:req.session.userInfo})
     }
     else{
       res.redirect('/')
