@@ -51,14 +51,16 @@ const { assert } = require('console')
       let msgId=await  messageModel.insert({user1_id:data.myId,user2_id:data.friendId,message:data.text})
       let msg = await messageModel.find({id:msgId})
 
-      socket.broadcast.to(data.friendId).emit('new message',{msg:msg[0]})
 
-      console.log(data.friendId,data.myId)
-      socket.emit('new message',{msg:msg[0]})
       
-      let count =  await messageModel.noReadedMessages(data.friendId)
-      socket.broadcast.to(data.friendId).emit('/count',{count:count[0]})
+      if(msg[0].message.length>0){
+        socket.broadcast.to(data.friendId).emit('new message',{msg:msg[0]})
+        socket.emit('new message',{msg:msg[0]})
+      }
+        let count =  await messageModel.noReadedMessages(data.friendId)
+        socket.broadcast.to(data.friendId).emit('/count',{count:count[0]})
 
+      
       
        
 

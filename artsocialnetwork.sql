@@ -11,7 +11,7 @@
  Target Server Version : 100138
  File Encoding         : 65001
 
- Date: 14/06/2020 19:42:05
+ Date: 14/06/2020 22:40:49
 */
 
 SET NAMES utf8mb4;
@@ -31,7 +31,7 @@ CREATE TABLE `comments`  (
   INDEX `post_id`(`post_id`) USING BTREE,
   CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 83 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 88 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of comments
@@ -111,6 +111,11 @@ INSERT INTO `comments` VALUES (75, 'as', 19, 84);
 INSERT INTO `comments` VALUES (76, 'a', 2, 84);
 INSERT INTO `comments` VALUES (81, 'a', 20, 84);
 INSERT INTO `comments` VALUES (82, 'hjhjh', 20, 98);
+INSERT INTO `comments` VALUES (83, 'asa', 4, 98);
+INSERT INTO `comments` VALUES (84, 'Axpers', 4, 98);
+INSERT INTO `comments` VALUES (85, 'a', 3, 98);
+INSERT INTO `comments` VALUES (86, 'a', 4, 98);
+INSERT INTO `comments` VALUES (87, 'k', 4, 98);
 
 -- ----------------------------
 -- Table structure for friend
@@ -125,15 +130,17 @@ CREATE TABLE `friend`  (
   INDEX `user2_id`(`user2_id`) USING BTREE,
   CONSTRAINT `friend_ibfk_1` FOREIGN KEY (`user1_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `friend_ibfk_2` FOREIGN KEY (`user2_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of friend
 -- ----------------------------
 INSERT INTO `friend` VALUES (2, 79, 84);
-INSERT INTO `friend` VALUES (3, 78, 84);
 INSERT INTO `friend` VALUES (4, 84, 81);
 INSERT INTO `friend` VALUES (5, 79, 78);
+INSERT INTO `friend` VALUES (6, 84, 98);
+INSERT INTO `friend` VALUES (8, 98, 78);
+INSERT INTO `friend` VALUES (9, 78, 84);
 
 -- ----------------------------
 -- Table structure for likes
@@ -148,39 +155,7 @@ CREATE TABLE `likes`  (
   INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 196 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of likes
--- ----------------------------
-INSERT INTO `likes` VALUES (63, 4, 78);
-INSERT INTO `likes` VALUES (64, 3, 78);
-INSERT INTO `likes` VALUES (133, 8, 84);
-INSERT INTO `likes` VALUES (135, 3, 84);
-INSERT INTO `likes` VALUES (138, 7, 85);
-INSERT INTO `likes` VALUES (139, 9, 85);
-INSERT INTO `likes` VALUES (142, 8, 85);
-INSERT INTO `likes` VALUES (149, 6, 81);
-INSERT INTO `likes` VALUES (154, 2, 84);
-INSERT INTO `likes` VALUES (161, 13, 87);
-INSERT INTO `likes` VALUES (164, 11, 84);
-INSERT INTO `likes` VALUES (165, 15, 95);
-INSERT INTO `likes` VALUES (167, 9, 95);
-INSERT INTO `likes` VALUES (168, 8, 95);
-INSERT INTO `likes` VALUES (173, 4, 95);
-INSERT INTO `likes` VALUES (174, 3, 95);
-INSERT INTO `likes` VALUES (175, 14, 95);
-INSERT INTO `likes` VALUES (177, 15, 84);
-INSERT INTO `likes` VALUES (179, 4, 84);
-INSERT INTO `likes` VALUES (181, 9, 84);
-INSERT INTO `likes` VALUES (182, 16, 84);
-INSERT INTO `likes` VALUES (184, 14, 84);
-INSERT INTO `likes` VALUES (186, 19, 84);
-INSERT INTO `likes` VALUES (191, 20, 84);
-INSERT INTO `likes` VALUES (192, 24, 98);
-INSERT INTO `likes` VALUES (193, 20, 98);
-INSERT INTO `likes` VALUES (194, 19, 98);
-INSERT INTO `likes` VALUES (195, 14, 98);
+) ENGINE = InnoDB AUTO_INCREMENT = 198 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for message
@@ -198,130 +173,11 @@ CREATE TABLE `message`  (
   INDEX `user2_id`(`user2_id`) USING BTREE,
   CONSTRAINT `message_ibfk_1` FOREIGN KEY (`user1_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `message_ibfk_2` FOREIGN KEY (`user2_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 188 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 215 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of message
 -- ----------------------------
-INSERT INTO `message` VALUES (69, 78, 84, 'barev', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (70, 78, 84, 'arararsahjhasjh', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (71, 78, 84, 'aa', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (72, 78, 84, 'aaa', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (73, 78, 84, 'a', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (74, 84, 78, 'a', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (75, 84, 78, 'aa', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (76, 78, 84, 'a', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (77, 78, 84, 'a', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (78, 78, 84, 'a', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (79, 78, 84, 'a', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (80, 84, 78, 'a', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (81, 78, 84, 'a', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (82, 78, 84, 'a', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (83, 84, 78, 'a', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (84, 84, 78, 'aaa', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (85, 84, 78, 'a', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (86, 78, 84, 'aa', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (87, 84, 78, 'a', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (88, 78, 84, 'a', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (89, 78, 84, 'ss', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (90, 84, 78, 'aaa', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (91, 84, 78, 'aaa', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (92, 84, 78, 'aaaa', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (93, 78, 84, 'arts', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (94, 78, 84, 'a', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (95, 78, 84, 'a', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (96, 78, 84, 'a', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (97, 84, 78, 'a', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (98, 84, 78, 'aa', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (99, 78, 84, 'a', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (100, 84, 78, 'a', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (101, 84, 78, 'aa', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (102, 78, 84, 'asa', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (103, 84, 78, 'a', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (104, 84, 78, 'a', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (105, 78, 84, 'a', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (106, 78, 84, 'as', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (107, 84, 78, 'a', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (108, 78, 84, 'a', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (109, 84, 78, 'a', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (110, 84, 78, 'a', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (111, 78, 84, 'a', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (112, 78, 84, 'aa', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (113, 78, 84, 'asa', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (114, 78, 84, 'a', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (115, 78, 84, 'asa', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (116, 84, 78, 'a', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (117, 84, 78, 'a', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (118, 84, 78, 'a', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (119, 84, 78, 'a', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (120, 78, 84, 'asa', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (121, 78, 84, 'a', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (122, 84, 78, 'a', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (123, 78, 84, 'Tsovak', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (124, 84, 78, 'a', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (125, 78, 84, 'aa', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (126, 84, 78, 'asa', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (127, 78, 84, 'Art', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (128, 78, 84, 'asa', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (129, 84, 78, 'a', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (130, 78, 84, 'asa', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (131, 78, 84, 'a', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (132, 84, 78, 'as', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (133, 78, 84, 'asa', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (134, 84, 78, 'art', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (135, 84, 78, 'asas', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (136, 84, 78, 'asa', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (137, 84, 78, 'a', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (138, 84, 78, 'asa', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (139, 78, 84, 'aa', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (140, 84, 78, 'a', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (141, 78, 84, 'arts', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (142, 78, 84, 'as', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (143, 84, 78, 'asasasasas', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (144, 78, 84, 'sakjk', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (145, 78, 84, 'asa', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (146, 78, 84, 'asa', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (147, 78, 84, 'asasasasa', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (148, 78, 84, 'a', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (149, 78, 84, 'a', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (150, 84, 78, 'asa', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (151, 84, 78, 'art', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (152, 84, 78, 'asas', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (153, 78, 84, 'aa', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (154, 78, 84, 'askjaskjkasjkjakjsjhadjksjkdjksjdkj', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (155, 84, 78, 'asalkslaklskl', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (156, 84, 78, 'asa', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (157, 78, 84, 'asas', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (158, 78, 84, 'asasa', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (159, 84, 78, 'asa', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (160, 78, 84, 'asa', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (161, 78, 84, 's', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (162, 78, 84, 'sasa', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (163, 78, 84, 'askslkl', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (164, 78, 84, 'as', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (165, 78, 84, 'asakl', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (166, 84, 78, 'Ara jaan exav', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (167, 78, 84, 'jan', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (168, 84, 78, 'dzec im arev', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (169, 78, 84, 'ara ba vonc axpers', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (170, 84, 78, 'Mama', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (171, 78, 84, 'aaa', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (172, 78, 84, 'Art', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (173, 84, 78, 'a', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (174, 95, 84, 'Art', '2020-06-14 19:22:52', 1);
-INSERT INTO `message` VALUES (175, 84, 95, 'Jan\n', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (176, 95, 84, 'inch ka axpers\n', '2020-06-14 19:22:52', 1);
-INSERT INTO `message` VALUES (177, 95, 84, 'Gorts qef hal vonc a', '2020-06-14 19:22:52', 1);
-INSERT INTO `message` VALUES (178, 79, 84, 'a', '2020-06-14 19:22:51', 1);
-INSERT INTO `message` VALUES (179, 78, 84, 'Axper', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (180, 84, 78, 'ha jan', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (181, 78, 84, 'inch ka axper jan', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (182, 84, 78, 'du asa axpers', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (183, 78, 84, 'ara axpers', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (184, 84, 78, 'Aram', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (185, 78, 84, 'Ha Jan', '2020-06-14 18:52:56', 1);
-INSERT INTO `message` VALUES (186, 84, 78, 'inch ka chka', '2020-06-14 18:54:29', 1);
-INSERT INTO `message` VALUES (187, 84, 78, '123', '2020-06-14 18:55:50', 1);
 
 -- ----------------------------
 -- Table structure for photos
@@ -394,7 +250,7 @@ CREATE TABLE `request`  (
   INDEX `user2_id`(`user2_id`) USING BTREE,
   CONSTRAINT `request_ibfk_1` FOREIGN KEY (`user1_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `request_ibfk_2` FOREIGN KEY (`user2_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of request
