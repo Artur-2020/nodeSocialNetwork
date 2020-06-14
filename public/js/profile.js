@@ -22,6 +22,7 @@ function showComments(){
    let id = this.getAttribute('data-id')
    let comments = this.parentElement.parentElement.querySelector('.commentMain')
    comments.style = `display:block;`
+   comments.innerHTML=''
    this.remove()
    let btn = document.createElement('button')
    btn.innerHTML='Close'

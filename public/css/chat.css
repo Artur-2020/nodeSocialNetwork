@@ -4,6 +4,9 @@ body,html{
     background: white;
    
 }
+.friendBody > .user_info > .friendName >.noReadMsgCount{
+    color: red;
+}
 
 .chat{
     margin-top: auto;

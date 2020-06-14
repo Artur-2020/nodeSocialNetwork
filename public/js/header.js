@@ -13,7 +13,7 @@ function requerstCount(){
 }
 requerstCount()
 
-   // setInterval(requerstCount,1000)
+   setInterval(requerstCount,1000)
 
 
    //requestnery cucadrelu kod

@@ -45,6 +45,14 @@ class UserModel extends Model{
 
 
 
+
+     }
+     deactive(){
+        let query = `update user set online=0 `
+        this.connection.query(query,(error,data)=>{
+         if(error) throw error
+         console.log(data)
+      })
      }
 
 }

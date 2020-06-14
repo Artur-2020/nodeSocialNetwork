@@ -19,10 +19,7 @@
          <% friends.forEach((i)=>{ %>
             <div class="friend">
                <img src="../<%=i.image%>" alt="">
-               <p><a href="friend/<%=i.id%>"><%=i.name%></a></p>
-               <p><a href="friend/<%=i.id%>"><%=i.surname%></a></p>
-               
-               
+               <p><a href="/user/<%=i.id%>"><%=i.name%> <%=i.surname%>  </a></p>               
             </div>
          <%})%>
       </div>

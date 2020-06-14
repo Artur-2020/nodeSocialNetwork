@@ -6,6 +6,7 @@ const express = require('express')
   var server = require('http').Server(app);
   var io = require('socket.io')(server);
   var messageModel = require('./models/messageModel')
+const { assert } = require('console')
 
 
 
@@ -21,13 +22,26 @@ const express = require('express')
   app.use(bodyParser.json())
   app.use(router)
 
-  io.on('connection', function (socket) {
+  io.on('connection',  function (socket) {
+   
+
+    socket.on('/number',async (data)=>{
+      socket.join(data.id)
+      let count = await messageModel.noReadedMessages(data.id)
+      socket.emit('/count',{count:count[0]})
+    })
     socket.on('/findmessage', async function (data) {
-      // console.log(data.myId)
+
+
       socket.join(data.myId) // esi vor im id pahem te indznic um em uzum uxarkel pahum em serverum
+
       let messages = await messageModel.findMessage(data.myId,data.friendId)
+
+      messageModel.update({read:1},{user1_id:data.friendId})
+
       
-      // console.log(messages)
+      
+      
 
       //ete serveric tvyal enq uxarkum u ed tvyaly menak mer mot a erevum et depqum tvyaly het enq uxarkum socket emiti mijocov
       
@@ -35,20 +49,25 @@ const express = require('express')
     });
     socket.on('/sendMessage', async (data)=>{
       let msgId=await  messageModel.insert({user1_id:data.myId,user2_id:data.friendId,message:data.text})
-
-
       let msg = await messageModel.find({id:msgId})
-        
-        socket.broadcast.to(data.friendId).emit('new message',{msg:msg[0]})
-        console.log(data.friendId,data.myId)
 
-        socket.emit('new message',{msg:msg[0]})
-    
+      socket.broadcast.to(data.friendId).emit('new message',{msg:msg[0]})
+
+      console.log(data.friendId,data.myId)
+      socket.emit('new message',{msg:msg[0]})
+      
+      let count =  await messageModel.noReadedMessages(data.friendId)
+      socket.broadcast.to(data.friendId).emit('/count',{count:count[0]})
+
+      
+       
+
         // socket.broadcast.emit('new message',{msg:msg[0]}) // esi saxi mot a cuyc talis im mot che
-      
-      
+        
     })
+       
 
+    
   });
 
   server.listen(8000)

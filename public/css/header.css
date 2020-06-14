@@ -198,6 +198,13 @@ header{
 	margin-left: 10px;
 	border: none;
 }
+#userId{
+	display: none;
+}
+
+#msg *{
+	margin-left: 5px;
+}
 @media screen and (max-width: 992px){
    #searchResult{
 		top: 280px;

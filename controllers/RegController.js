@@ -39,6 +39,7 @@ class RegController{
         }
 
         // console.log(req.session.userId)
+        userModel.update({online:0},{id:req.session.userId})
         req.session.destroy()
          res.render('login',{errors:error,activeError})
       }
@@ -113,6 +114,7 @@ class RegController{
             res.redirect('/')
           }
           else{
+            userModel.update({online:1},{id:req.session.userId})
             res.redirect('profile')
 
           }

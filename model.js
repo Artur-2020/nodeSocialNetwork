@@ -84,7 +84,7 @@ class Model{
       let query  = `Update ${this.table} set `
 
       for(let i in value){
-         query+=`${i}='${value[i]}', `
+         query+=`${this.table}.${i}='${value[i]}', `
       }
       query=query.substring(0,query.length-2)
       query+=' where '

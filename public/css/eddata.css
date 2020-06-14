@@ -96,9 +96,7 @@ form> input:hover{
   font-family: sans-serif;
   transition: 0.5s;
 }
-#passwordForm{
-   display: none;
-}
+
 .active{
    display: block;
    width: 160px;
@@ -116,4 +114,10 @@ form> input:hover{
 .icons{
    margin: 0 5px;
    font-size: 12px;
+}
+.activeForm{
+   display: block;
+}
+.passiveForm{
+   display: none;
 }

@@ -9,6 +9,7 @@ const likeModel =  require('../models/likesModel')
 const fs =  require('fs');
 const {check, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
+const messageModel = require('../models/messageModel')
 const saltRounds = 10;
 
 
@@ -91,13 +92,20 @@ class UserController {
     //ejum nkar avelacnelu hamar
       async addPhoto(req,res){
       let id = req.session.userId
-      let image ="image/"+ req.file.filename
-      let insid = await photosModel.insert({name:image,user_id:id})
-      res.redirect('/photos')
+      if(req.file){
+        let image ="image/"+ req.file.filename
+        let insid = await photosModel.insert({name:image,user_id:id})
+        res.redirect('/photos')
+      }
+      else{
+        res.redirect('/photos')
+      }
+      
 
     }
     //tvyal poxelu ej gnalu hamar
        edit(req,res){
+         let flag='chka'
          if(req.session.userId){
             
           let passwordError={}
@@ -110,6 +118,7 @@ class UserController {
             })  
            }
            else if(req.session.changePassError){
+             flag = 'ka'
             req.session.changePassError.forEach((i)=>{
               if(passwordError[i.param]==undefined){
                 passwordError[i.param] = i.msg
@@ -118,7 +127,7 @@ class UserController {
 
            }
           
-           res.render('editdata',{editerrors:infoError,passerrors:passwordError,user:req.session.userInfo})
+           res.render('editdata',{editerrors:infoError,passerrors:passwordError,user:req.session.userInfo,flag})
         }
         else{
 
@@ -162,6 +171,7 @@ class UserController {
         }
     } 
     async deletePhoto(req,res){
+      userModel.update({image:'image/avatar.png'},{id:req.session.userId})
       let image = await photosModel.find({id:req.body.id})
       let name = "public/"
       let imageName = image[0]['name']
@@ -289,13 +299,13 @@ class UserController {
          await postsModel.insert({text:req.body.postText,user_id:req.session.userId,picture:image})
 
       }
-      else if(!req.body.postText){
+       if(!req.body.postText && req.file){
         let image ="image/"+ req.file.filename
 
         await postsModel.insert({picture:image,user_id:req.session.userId})
 
       }
-      else if(!req.file){
+      else if(!req.file && req.body.postText){
         await postsModel.insert({text:req.body.postText,user_id:req.session.userId})
       }
       
@@ -437,6 +447,8 @@ class UserController {
     }
     async userPosts(req,res){
       if(req.session.userId){
+
+
         let friend = await userModel.find({id:req.params.id})
         let posts = await postsModel.findPost(req.params.id)
         // console.log(UserPosts)
@@ -463,11 +475,20 @@ class UserController {
     
   }
    async chat(req,res){
+    let  leaveId
     if(req.session.userId){
+      leaveId = req.session.userId
+       
+
       let friends = await friendModel.findFriend(req.session.userId)
+      for(let i=0;i<friends.length;i++){
+        let count = await messageModel.friendNoRead(friends[i]['id'],req.session.userId)
+        friends[i].msgCount = count[0]['qanak']
+      }
       res.render('chat',{friends,user:req.session.userInfo,id:req.session.userId})
     }
     else{
+      userModel.deactive()
       res.redirect('/')
     }
 

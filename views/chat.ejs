@@ -37,12 +37,20 @@
                                 <li> 
                                     <div  class="d-flex bd-highlight friendBody" data-id='<%=i.id%>'>
                                         <div class="img_cont">
-                                            <img src="<%=i.image%>" class="rounded-circle user_img">
-                                            <span class="online_icon offline"></span>
+														  <img src="<%=i.image%>" class="rounded-circle user_img">
+														  <%if(i.online == 0){%>
+														  		<span class="online_icon offline"></span>
+														  <%} else {%>
+															<span class="online_icon "></span>
+															<%}%>	
                                         </div>
                                         <div  class="user_info">
-                                            <span class="friendName"><%=i.name%> <%=i.surname%></span>
-                                            <p><%=i.name%> left 7 mins ago</p>
+														  <span class="friendName"><%=i.name%> <%=i.surname%>
+															<%if(i.msgCount>0){%>
+																<span class="noReadMsgCount"><%=i.msgCount%></span>
+															<%}%>	
+
+														</span>
                                         </div>
                                     </div>
                                 </li>
@@ -59,7 +67,6 @@
 							<div class="d-flex bd-highlight">
 								<div class="img_cont">
 									<img id='chatImage' src="" class="rounded-circle user_img">
-									<span class="online_icon" id='chatIcon'></span>
 								</div>
 								<div class="user_info">
 									<span id="chatName"></span>
@@ -111,6 +118,10 @@
 			
 
 		function friend(){
+			if(this.querySelector('.noReadMsgCount')){
+				document.querySelector('#msgCount').innerHTML = document.querySelector('#msgCount').innerHTML - this.querySelector('.noReadMsgCount').innerHTML
+				this.querySelector('.noReadMsgCount').innerHTML=''
+			}
 			if(document.querySelector('.active')){
 				document.querySelector('.active').classList.remove('active')
 			}
@@ -120,7 +131,6 @@
 			document.getElementById('chatImage').style='display:block'
 			document.getElementById('chatImage').setAttribute('src',image)
 			//iconneri haytnvum
-			document.getElementById('chatIcon').style='display:block'
 
 			document.querySelector('.video_cam').style='display:block;'
 
@@ -133,6 +143,7 @@
 
 			myId = document.getElementById('userId').innerHTML
 			friendId = this.getAttribute('data-id')
+
 			socket.emit('/findmessage',{myId,friendId})  
 			socket.on('/messages',(data)=>{
 				for(let i in data){
@@ -180,11 +191,12 @@
 		}	
 		function sendMessage(){
 			let text= document.getElementById('messageText').value
-			// console.log(myId,friendId,text	)
+			document.getElementById('messageText').value=''
+
 			socket.emit('/sendMessage',{myId,friendId,text})
 		}
 		socket.on('new message',(data)=>{
-				console.log(data['msg'])
+				// console.log(data['msg'])
 				
 							let div1 = document.createElement('div')
 							div1.setAttribute('class','d-flex')
@@ -220,8 +232,9 @@
 						}
 
 						document.getElementById('allMessages').append(div1)
-			
+						
 		})
+		
 
 	
     </script>
