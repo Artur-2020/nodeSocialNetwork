@@ -493,6 +493,11 @@ class UserController {
     }
 
   }
+  delPost(req,res){
+    postsModel.delete({id:req.body.id})
+    res.send('ok')
+  }
+  
 }
 
 

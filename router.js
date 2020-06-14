@@ -183,4 +183,6 @@ router.post('/disLike',UserController.like)
 
 router.post('/getLikers',UserController.getLikers)
 
+router.post('/delPost',UserController.delPost)
+
 module.exports = router

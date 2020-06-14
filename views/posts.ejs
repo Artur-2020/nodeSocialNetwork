@@ -22,6 +22,7 @@
     <div id="showPosts">
       <% posts.forEach((i)=>{ %>
         <div class="postMain">
+          <button data-id = '<%=i.id%>' class="delPost">Delete</button>
           <div class="authorPost">
             <div class="user_info">
               <img src="<%=user.image%>" alt="">

@@ -1,3 +1,21 @@
+let delPosts = document.querySelectorAll('.delPost')
+
+for(let i = 0;i<delPosts.length;i++){
+   delPosts[i].addEventListener('click',delPost)
+}
+
+function delPost(){
+   let id = this.getAttribute('data-id')
+   axios.post('/delPost',{id}).
+   then((result)=>{
+      console.log(result.data)
+      this.parentElement.remove()
+   }).
+   catch((error)=>{
+      console.log(error)
+   })
+}
+
 let showbtns = document.querySelectorAll('.showComments')
 
 for(let i=0;i<showbtns.length;i++){
@@ -22,6 +40,8 @@ function showComments(){
    let id = this.getAttribute('data-id')
    let comments = this.parentElement.parentElement.querySelector('.commentMain')
    comments.style = `display:block;`
+   comments.innerHTML=''
+
    this.remove()
    let btn = document.createElement('button')
    btn.innerHTML='Close'

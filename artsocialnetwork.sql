@@ -11,7 +11,7 @@
  Target Server Version : 100138
  File Encoding         : 65001
 
- Date: 14/06/2020 22:40:49
+ Date: 14/06/2020 23:27:03
 */
 
 SET NAMES utf8mb4;
@@ -31,7 +31,7 @@ CREATE TABLE `comments`  (
   INDEX `post_id`(`post_id`) USING BTREE,
   CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 88 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 89 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of comments
@@ -116,6 +116,7 @@ INSERT INTO `comments` VALUES (84, 'Axpers', 4, 98);
 INSERT INTO `comments` VALUES (85, 'a', 3, 98);
 INSERT INTO `comments` VALUES (86, 'a', 4, 98);
 INSERT INTO `comments` VALUES (87, 'k', 4, 98);
+INSERT INTO `comments` VALUES (88, 'a', 25, 84);
 
 -- ----------------------------
 -- Table structure for friend
@@ -155,7 +156,41 @@ CREATE TABLE `likes`  (
   INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 198 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 204 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of likes
+-- ----------------------------
+INSERT INTO `likes` VALUES (63, 4, 78);
+INSERT INTO `likes` VALUES (64, 3, 78);
+INSERT INTO `likes` VALUES (133, 8, 84);
+INSERT INTO `likes` VALUES (135, 3, 84);
+INSERT INTO `likes` VALUES (138, 7, 85);
+INSERT INTO `likes` VALUES (139, 9, 85);
+INSERT INTO `likes` VALUES (142, 8, 85);
+INSERT INTO `likes` VALUES (149, 6, 81);
+INSERT INTO `likes` VALUES (154, 2, 84);
+INSERT INTO `likes` VALUES (161, 13, 87);
+INSERT INTO `likes` VALUES (164, 11, 84);
+INSERT INTO `likes` VALUES (165, 15, 95);
+INSERT INTO `likes` VALUES (167, 9, 95);
+INSERT INTO `likes` VALUES (168, 8, 95);
+INSERT INTO `likes` VALUES (173, 4, 95);
+INSERT INTO `likes` VALUES (174, 3, 95);
+INSERT INTO `likes` VALUES (175, 14, 95);
+INSERT INTO `likes` VALUES (177, 15, 84);
+INSERT INTO `likes` VALUES (179, 4, 84);
+INSERT INTO `likes` VALUES (181, 9, 84);
+INSERT INTO `likes` VALUES (182, 16, 84);
+INSERT INTO `likes` VALUES (184, 14, 84);
+INSERT INTO `likes` VALUES (186, 19, 84);
+INSERT INTO `likes` VALUES (191, 20, 84);
+INSERT INTO `likes` VALUES (192, 24, 98);
+INSERT INTO `likes` VALUES (193, 20, 98);
+INSERT INTO `likes` VALUES (194, 19, 98);
+INSERT INTO `likes` VALUES (195, 14, 98);
+INSERT INTO `likes` VALUES (197, 4, 98);
+INSERT INTO `likes` VALUES (198, 25, 84);
 
 -- ----------------------------
 -- Table structure for message
@@ -201,7 +236,6 @@ INSERT INTO `photos` VALUES (40, 'image/1591135718625Tulips.jpg', 81);
 INSERT INTO `photos` VALUES (42, 'image/1591191408247151021643.jpg', 87);
 INSERT INTO `photos` VALUES (44, 'image/1591191638464Без названия (1).jpg', 87);
 INSERT INTO `photos` VALUES (46, 'image/1591461449488Lighthouse.jpg', 95);
-INSERT INTO `photos` VALUES (47, 'image/1591475736840U5o5rxGXWIo.jpg', 84);
 
 -- ----------------------------
 -- Table structure for posts
@@ -215,7 +249,7 @@ CREATE TABLE `posts`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of posts
@@ -236,6 +270,7 @@ INSERT INTO `posts` VALUES (16, 'asa', NULL, 84);
 INSERT INTO `posts` VALUES (19, NULL, 'image/159204734040045.PNG', 84);
 INSERT INTO `posts` VALUES (20, 'a', NULL, 84);
 INSERT INTO `posts` VALUES (24, 'a', NULL, 98);
+INSERT INTO `posts` VALUES (25, 'aa', NULL, 84);
 
 -- ----------------------------
 -- Table structure for request
@@ -280,7 +315,7 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (78, 'Aram', 'Hovhannisyan', 40, 'aram@gmail.com', '$2b$10$2gDGA3E0d2NK8QzxclxqY.rUXdeNP/9oW9/Okh371MOGbo8dsQc.K', 'image/1590789737282Tulips.jpg', 1, 1);
+INSERT INTO `user` VALUES (78, 'Aram', 'Hovhannisyan', 40, 'aram@gmail.com', '$2b$10$2gDGA3E0d2NK8QzxclxqY.rUXdeNP/9oW9/Okh371MOGbo8dsQc.K', 'image/1590789737282Tulips.jpg', 1, 0);
 INSERT INTO `user` VALUES (79, 'Nare', 'Vardanyan', 25, 'nare@gmail.com', '$2b$10$U44gAr2/DNimUDZe22x88OMd4OQ6e71zFfsq6/b6aW3bDEbavsmfO', 'image/avatar.png', 1, 0);
 INSERT INTO `user` VALUES (80, 'Armine', 'Ghazaryan', 78, 'armine@mail.ru', '$2b$10$bnWg80Kfpj.2.T1bnPXyAuEiucl9omUV57KHPvLNaGpDXUaebUIGe', 'image/avatar.png', 0, 0);
 INSERT INTO `user` VALUES (81, 'Seda', 'Amirbekyan', 35, 'seda@gmail.com', '$2b$10$jD2cuPunbPNFT4.CctoicOIrI6TR0BX4E/fJdyO1sq5BqzNnJaM06', 'image/avatar.png', 1, 0);
