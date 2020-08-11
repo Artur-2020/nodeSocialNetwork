@@ -185,4 +185,6 @@ router.post('/getLikers',UserController.getLikers)
 
 router.post('/delPost',UserController.delPost)
 
+router.post('/getNotifs',UserController.getNotifs)
+
 module.exports = router

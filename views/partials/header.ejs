@@ -41,11 +41,17 @@
               
             </div>
           </li>
-          <!-- <li class="nav-item" id="NavReqCount">
-            <a class="nav-link" href="#"> <i class="lni lni-users linkIcon"> <span id="requestCount"></span></i>Friend Requests</a>
-          </li> -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="notificationDrop" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="lni lni-alarm linkIcon"> <span id="notificationCount"></span></i>Notifications 
+            </a>
+            <div id="notifs" class="dropdown-menu" aria-labelledby="navbarDropdown">
+             
+            </div>
+          </li>
+         
           <li class="nav-item">
-            <a id="msg" class="nav-link " href="/chat"> <i class="lni lni-envelope linkIcon"><span id="msgCount"></span></i>Messages</a>
+            <a id="msg" class="nav-link linkIcon " href="/chat"> <i class="lni lni-envelope linkIcon"><span id="msgCount"></span></i>Messages</a>
           </li>
           <li class="nav-item">
            <input type="text" id="searchInp" placeholder="Search">

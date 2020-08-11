@@ -123,6 +123,7 @@
               <div class="user_info">
                   <img src="<%=i.image%>" alt="">
                   <div>
+                    <span class='notifId'><%=i.user_id%></span>
                     <p><%=i.name%> <%=i.surname%> </p>
                   </div>
                 </div>
@@ -155,6 +156,7 @@
                <input class="comText" type="text" >
                <button class="addComment"  data-id = <%=i.id%>>Send</button>
              </div>
+             
           </div>
        <%})%>
     </div>

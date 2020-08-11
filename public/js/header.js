@@ -13,7 +13,7 @@ function requerstCount(){
 }
 requerstCount()
 
-   setInterval(requerstCount,1000)
+//    setInterval(requerstCount,1000)
 
 
    //requestnery cucadrelu kod
@@ -332,3 +332,46 @@ requerstCount()
           searchList.style.display='none'
       }
    }
+   // notifications 
+
+   document.getElementById('notificationDrop').addEventListener('click',function (){
+       let notifDiv = document.getElementById('notifs')
+       axios.post('getNotifs').
+        then((result)=>{
+            let notifs = result.data
+            notifDiv.innerHTML = ''
+            for(let i = 0;i<notifs.length;i++ ){
+                let div =  document.createElement('div')
+                div.setAttribute('class','notifBody')
+
+                let image = document.createElement('img')
+                    image.setAttribute('src',`../${notifs[i]['image']}`)
+                    image.setAttribute('class','notifAuthorImage')
+
+                let name = document.createElement('p')
+                    name.setAttribute('class','notifAuthorName')
+                    name.innerHTML=notifs[i]['name']
+
+                let surname = document.createElement('p')    
+                    surname.setAttribute('class','notifAuthorSurname')
+                    surname.innerHTML=notifs[i]['surname']
+
+                let notification =  document.createElement('p')
+                    notification.setAttribute('class','notifText')    
+                    if(notifs[i]['type']=='like'){
+                        notification.innerHTML = 'liked youre post'
+                    }
+                    else{
+                        notification.innerHTML = 'commented on youre post'
+                    }
+                div.append(image,name,surname,notification)
+                notifDiv.append(div)    
+            }
+
+            
+
+        }).
+        catch((error)=>{
+            console.log(error)
+        })
+   })

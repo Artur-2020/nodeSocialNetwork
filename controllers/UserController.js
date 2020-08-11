@@ -5,6 +5,7 @@ const friendModel = require('../models/friendModel')
 const postsModel = require('../models/postsModel')
 const commentsModel = require('../models/commentsModel')
 const likeModel =  require('../models/likesModel')
+const notificationModel = require('../models/notificationModel')
 
 const fs =  require('fs');
 const {check, validationResult } = require('express-validator');
@@ -340,6 +341,10 @@ class UserController {
     }
     async addComment(req,res){
      if(req.body.text.length > 0){
+       if(req.body.fId){
+        await notificationModel.insert({user1_id:req.session.userId,user2_id:req.body.fId,type:"comment",post_id:req.body.post_id})
+
+       }
         await commentsModel.insert({comment:req.body.text,post_id:req.body.post_id,user_id:req.session.userId})
         res.send('added')
      }
@@ -352,14 +357,22 @@ class UserController {
       res.send(comments)
     }
     async like(req,res){
+        console.log('ynkerojId',req.body.fId)
+
+      
       let pId = req.body.postId
       let flag =await likeModel.find({user_id:req.session.userId,post_id:pId})
-      // delId = insid
       if(flag.length !=0){
         let likeId = flag[0].id
         likeModel.delete({id:likeId})
+        if(req.body.fId){
+          await notificationModel.delete({user1_id:req.session.userId,user2_id:req.body.fId,type:'like',post_id:pId})
+        }
       }
       else{
+        if(req.body.fId){
+          await notificationModel.insert({user1_id:req.session.userId,user2_id:req.body.fId,type:'like',post_id:pId})  
+        }
       let a = await likeModel.insert({post_id:pId,user_id:req.session.userId})
 
       }
@@ -496,6 +509,11 @@ class UserController {
   delPost(req,res){
     postsModel.delete({id:req.body.id})
     res.send('ok')
+  }
+
+   async getNotifs(req,res){
+   let notifs = await notificationModel.getNotifs(req.session.userId)
+    res.send(notifs)
   }
   
 }

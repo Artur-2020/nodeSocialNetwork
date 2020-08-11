@@ -90,8 +90,12 @@ function addComment(){
    let src = document.getElementById('userImage').getAttribute('src')
    let postId=this.getAttribute('data-id')
    let text = this.parentElement.querySelector('.comText').value
-   // console.log(text)
-   axios.post('/addComment',{text,post_id:postId}).
+   let fId
+   if( this.parentElement.parentElement.querySelector('.notifId')){
+     fId = this.parentElement.parentElement.querySelector('.notifId').innerHTML
+   }
+   
+   axios.post('/addComment',{text,post_id:postId,fId}).
    then((result)=>{
       console.log(result.data)
 
@@ -138,8 +142,11 @@ function like(){
    let likeCount=this.parentElement.querySelector('.likeCount').innerHTML
    let parent = this.parentElement
    let id = this.parentElement.getAttribute('data-id')
-
-   axios.post('/like',{postId:id}).
+   let fId
+   if( this.parentElement.parentElement.querySelector('.notifId')){
+     fId = this.parentElement.parentElement.querySelector('.notifId').innerHTML
+   }
+   axios.post('/like',{postId:id,fId:fId}).
    then((result)=>{
       this.parentElement.querySelector('.likeCount').remove()
       likeCount++
@@ -176,7 +183,11 @@ function disLike(){
   let likeCount = this.parentElement.querySelector('.likeCount').innerHTML
    let parent = this.parentElement
    let id = this.parentElement.getAttribute('data-id')
-   axios.post('/disLike',{postId:id}).
+   let fId
+   if( this.parentElement.parentElement.querySelector('.notifId')){
+     fId = this.parentElement.parentElement.querySelector('.notifId').innerHTML
+   }
+   axios.post('/disLike',{postId:id,fId}).
    then((result)=>{
    this.parentElement.querySelector('.likeCount').remove()
    likeCount--
