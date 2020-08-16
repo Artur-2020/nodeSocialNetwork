@@ -22,12 +22,21 @@
   <div id="changeMenu">
   
    <%if(flag=='ka'){%>
-      <p class="menuItem" id="personalInfo"> <i class="lni lni-cog icons"></i>Personal Information</p>
+      <p class="menuItem " id="personalInfo"> <i class="lni lni-cog icons"></i>Personal Information</p>
       <p class="menuItem active" id="Password"><i class="lni lni-unlock icons"></i>Password</p>
-   <%} else{%>
+      <p class="menuItem " id="deactivate"><i class="lni lni-trash icons"></i>Deactivate Account</p>
+
+   <%} else if(delError !=''){%>
+      <p class="menuItem " id="personalInfo"> <i class="lni lni-cog icons"></i>Personal Information</p>
+      <p class="menuItem" id="Password"><i class="lni lni-unlock icons"></i>Password</p>
+      <p class="menuItem active " id="deactivate"><i class="lni lni-trash icons"></i>Deactivate Account</p>
+
+    <%}  else{%>
       <p class="menuItem active" id="personalInfo"> <i class="lni lni-cog icons"></i>Personal Information</p>
       <p class="menuItem" id="Password"><i class="lni lni-unlock icons"></i>Password</p>
-    <%}%>   
+      <p class="menuItem " id="deactivate"><i class="lni lni-trash icons"></i>Deactivate Account</p>
+
+    <%} %>   
   </div>
 
    
@@ -36,17 +45,17 @@
          <h1 id="editHead">Edit Password</h1>
        <form action="/editData" method="post" class="passiveForm" id="personalForm">
           <label>Name</label>
-             <p><%=editerrors.name%></p>  
+             <p class="error"><%=editerrors.name%></p>  
              <input type="text" name='name' class="inp" value = <%=user.name%>> 
     
           <label>Surname</label>
-             <p><%=editerrors.surname%></p>  
+             <p class="error" ><%=editerrors.surname%></p>  
              <input type="text" class="inp"  name='surname' value = <%=user.surname%>> 
           <label>Age</label> 
-             <p><%=editerrors.age%></p>
+             <p class="error" ><%=editerrors.age%></p>
              <input type="text" class="inp"  name='age'value = <%= user.age%>> 
           <label>Email</label>
-             <p><%=editerrors.email%></p>
+             <p class="error"  ><%=editerrors.email%></p>
              <input class="inp" type="text" name="email" value = <%=user.email%>> 
             <div id="btn" >
                <button class="editBtn">Edit</button>
@@ -54,38 +63,47 @@
        </form>
        <form action="/changePassword" method="post" class="activeForm" id="passwordForm">
          <label>Old Password</label>
-             <p><%=passerrors.oldPassword%></p>  
+             <p class="error"  ><%=passerrors.oldPassword%></p>  
              <input type="password" name='oldPassword' class="inp" > 
     
           <label>New Password</label>
-          <p><%=passerrors.newPassword%></p>  
+          <p class="error" ><%=passerrors.newPassword%></p>  
              
              <input type="password" class="inp"  name='newPassword'> 
           <label>Confirm New Password</label> 
-          <p><%=passerrors.confirm_password%></p>  
+          <p class="error" ><%=passerrors.confirm_password%></p>  
    
              <input type="password" class="inp"  name='confirm_password'> 
             <div id="btn" >
                <button class="editBtn">Change</button>
             </div>
       </form>
-      </div>
-    <%} else {%>
+      <!-- deleteAccount -->
+      <form action="/deleteAccount" class="passiveForm" id="deactivateForm">
+         <label>Enter Your Password</label>
+         <input type="password" class="inp" name = 'delPas'>
+         <div id="btn" >
+            <button class="editBtn">Delete</button>
+         </div>
+      </form>
+   </div>
+
+    <%} else if(delError !='')  {%>
       <div id="edit">
-         <h1 id="editHead">Edit Datas</h1>
-       <form action="/editData" method="post" class="activeForm" id="personalForm">
+         <h1 id="editHead">Delete Account</h1>
+       <form action="/editData" method="post" class="passiveForm" id="personalForm">
           <label>Name</label>
-             <p><%=editerrors.name%></p>  
+             <p class="error" ><%=editerrors.name%></p>  
              <input type="text" name='name' class="inp" value = <%=user.name%>> 
     
           <label>Surname</label>
-             <p><%=editerrors.surname%></p>  
+             <p class="error" ><%=editerrors.surname%></p>  
              <input type="text" class="inp"  name='surname' value = <%=user.surname%>> 
           <label>Age</label> 
-             <p><%=editerrors.age%></p>
+             <p class="error" ><%=editerrors.age%></p>
              <input type="text" class="inp"  name='age'value = <%= user.age%>> 
           <label>Email</label>
-             <p><%=editerrors.email%></p>
+             <p class="error" ><%=editerrors.email%></p>
              <input class="inp" type="text" name="email" value = <%=user.email%>> 
             <div id="btn" >
                <button class="editBtn">Edit</button>
@@ -93,24 +111,81 @@
        </form>
        <form action="/changePassword" method="post" class="passiveForm" id="passwordForm">
          <label>Old Password</label>
-             <p><%=passerrors.oldPassword%></p>  
+             <p class="error" ><%=passerrors.oldPassword%></p>  
              <input type="password" name='oldPassword' class="inp" > 
     
           <label>New Password</label>
-          <p><%=passerrors.newPassword%></p>  
+          <p class="error" ><%=passerrors.newPassword%></p>  
              
              <input type="password" class="inp"  name='newPassword'> 
           <label>Confirm New Password</label> 
-          <p><%=passerrors.confirm_password%></p>  
+          <p class="error" ><%=passerrors.confirm_password%></p>  
    
              <input type="password" class="inp"  name='confirm_password'> 
             <div id="btn" >
                <button class="editBtn">Change</button>
             </div>
       </form>
+      <form action="/deleteAccount" method="POST" class="activeForm" id="deactivateForm">
+         <label>Enter Your Password</label>
+         <p class="error" ><%=delError%></p>
+         <input type="password" class="inp" name = 'delPas'>
+         <div id="btn" >
+            <button class="editBtn">Delete</button>
+         </div>
+
+      </form>
       </div>
 
-    <%}%>    
+    <%} else {%> 
+      <div id="edit">
+         <h1 id="editHead">Edit Datas</h1>
+       <form action="/editData" method="post" class="activeForm" id="personalForm">
+          <label>Name</label>
+             <p class="error"  ><%=editerrors.name%></p>  
+             <input type="text" name='name' class="inp" value = <%=user.name%>> 
+    
+          <label>Surname</label>
+             <p class="error" ><%=editerrors.surname%></p>  
+             <input type="text" class="inp"  name='surname' value = <%=user.surname%>> 
+          <label>Age</label> 
+             <p class="error" ><%=editerrors.age%></p>
+             <input type="text" class="inp"  name='age'value = <%= user.age%>> 
+          <label>Email</label>
+             <p class="error" ><%=editerrors.email%></p>
+             <input class="inp" type="text" name="email" value = <%=user.email%>> 
+            <div id="btn" >
+               <button class="editBtn">Edit</button>
+            </div>
+       </form>
+       <form action="/changePassword" method="post" class="passiveForm" id="passwordForm">
+         <label>Old Password</label>
+             <p class="error" ><%=passerrors.oldPassword%></p>  
+             <input type="password" name='oldPassword' class="inp" > 
+    
+          <label>New Password</label>
+          <p class="error" ><%=passerrors.newPassword%></p>  
+             
+             <input type="password" class="inp"  name='newPassword'> 
+          <label>Confirm New Password</label> 
+          <p class="error"><%=passerrors.confirm_password%></p>  
+   
+             <input type="password" class="inp"  name='confirm_password'> 
+            <div id="btn" >
+               <button class="editBtn">Change</button>
+            </div>
+      </form>
+      <form action="/deleteAccount" method="POST" class="passiveForm" id="deactivateForm">
+         <label>Enter Your Password</label>
+         <input type="password" class="inp" name = 'delPas'>
+         <div id="btn" >
+            <button class="editBtn">Delete</button>
+         </div>
+
+      </form>
+      </div>
+     <%}%> 
+
  </div>
    
 </body>  

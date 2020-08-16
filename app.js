@@ -6,6 +6,7 @@ const express = require('express')
   var server = require('http').Server(app);
   var io = require('socket.io')(server);
   var messageModel = require('./models/messageModel')
+  var notificationModel  = require('./models/notificationModel')
 const { assert } = require('console')
 
 
@@ -29,6 +30,10 @@ const { assert } = require('console')
       socket.join(data.id)
       let count = await messageModel.noReadedMessages(data.id)
       socket.emit('/count',{count:count[0]})
+
+      let notifCount = await  notificationModel.notifCount(data.id)
+      socket.emit('/notifCount',{count:notifCount[0]['count']})
+
     })
     socket.on('/findmessage', async function (data) {
 

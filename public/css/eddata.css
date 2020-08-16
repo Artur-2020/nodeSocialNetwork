@@ -121,3 +121,6 @@ form> input:hover{
 .passiveForm{
    display: none;
 }
+.error{
+   color:red;
+}

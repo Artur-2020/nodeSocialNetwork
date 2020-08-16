@@ -142,53 +142,103 @@ let likers = document.querySelectorAll('.likeCount')
          likers[i].addEventListener('click',getLikers)
       }   
 
-function showComments(){
-   this.parentElement.parentElement.querySelector('.commentNow').style = `display:none;`
-
-   let parent = this.parentElement
-   let id = this.getAttribute('data-id')
-   let comments = this.parentElement.parentElement.querySelector('.commentMain')
-   comments.style = `display:block;`
-   comments.innerHTML=''
-   this.remove()
-   let btn = document.createElement('button')
-   btn.innerHTML='Close'
-   btn.setAttribute('class','closeComments')
-   parent.append(btn)
-
-   axios.post('/showPostComments',{id}).
-      then((result)=>{
-        
-         for(let i = 0;i<result.data.length;i++){
-            let commentAuthor = document.createElement('div')
-               commentAuthor.setAttribute('class','commentAuthor')
-            let image = document.createElement('img')
-               image.setAttribute('src',`../${result.data[i].image}`) 
-               image.setAttribute('class','commentAuthorImage')  
-            let commentText = document.createElement('p')
-               commentText.innerHTML= result.data[i].comment
-            let name = document.createElement('p')
-               name.setAttribute('class','commentAuthorName')
-               name.innerHTML = result.data[i].name   
-            let surname = document.createElement('p')
-               surname.setAttribute('class','commentAuthorSurname')
-               surname.innerHTML = result.data[i].surname 
-
-            commentAuthor.append(image,name,surname)
-            comments.append(commentAuthor,commentText)   
-
-         }
-         let closebtns=document.querySelectorAll('.closeComments')
-            for(let i=0;i<closebtns.length;i++){
-               closebtns[i].addEventListener('click',closComments)
-            }
-      }).
-      catch((error)=>{
-         console.log(error)
+      function showComments(){
+         this.parentElement.parentElement.querySelector('.commentNow').style = `display:none;`
+      
+         let userID = document.querySelector('#userId').innerHTML 
          
-      })      
-}
-
+         let parent = this.parentElement
+         let id = this.getAttribute('data-id')
+         let comments = this.parentElement.parentElement.querySelector('.commentMain')
+         comments.style = `display:block;`
+         comments.innerHTML=''
+         this.remove()
+         let btn = document.createElement('button')
+         btn.innerHTML='Close'
+         btn.setAttribute('class','closeComments')
+         parent.append(btn)
+      
+         axios.post('/showPostComments',{id}).
+            then((result)=>{
+               console.log('comments',result.data)
+              
+               for(let i = 0;i<result.data.length;i++){
+               let comment = document.createElement('div')
+               comment.setAttribute('class','comment')
+      
+                  let commentAuthor = document.createElement('div')
+                     commentAuthor.setAttribute('class','commentAuthor')
+                  let image = document.createElement('img')
+                     image.setAttribute('src',result.data[i].image) 
+                     image.setAttribute('class','commentAuthorImage')  
+                  let commentText = document.createElement('p')
+                     
+                     commentText.innerHTML= result.data[i].comment
+                  let name = document.createElement('p')
+                     name.setAttribute('class','commentAuthorName')
+                     name.innerHTML = result.data[i].name   
+                  let surname = document.createElement('p')
+                     surname.setAttribute('class','commentAuthorSurname')
+                     surname.innerHTML = result.data[i].surname 
+                     
+                 
+      
+                     if(result.data[i]['user_id']==userID){
+                         
+                        let delBtn = document.createElement('button')
+                        delBtn.innerHTML= `<i class="lni lni-close"></i>`
+                        delBtn.setAttribute('class','deleteCom')
+                        delBtn.dataset.id = result.data[i]['id']
+      
+                         let delComBtns = document.querySelectorAll('.deleteCom')
+      
+                         for(let i = 0 ;i<delComBtns.length;i++){
+                            delComBtns[i].addEventListener('click',deleteComment)
+                         }
+      
+                        commentAuthor.append(image,name,surname,delBtn)
+                        comment.append(commentAuthor,commentText)  
+                        comments.append(comment)
+      
+      
+                     }
+                     else{
+                        
+                        
+                        commentAuthor.append(image,name,surname)
+                        comment.append(commentAuthor,commentText)
+                        comments.append(comment)  
+                     }
+                    
+      
+       
+      
+               }
+               let closebtns=document.querySelectorAll('.closeComments')
+                  for(let i=0;i<closebtns.length;i++){
+                     closebtns[i].addEventListener('click',closComments)
+                  }
+            }).
+            catch((error)=>{
+               console.log(error)
+               
+            })      
+      }
+      
+      function deleteComment(){
+         let parent  = this.parentElement.parentElement
+         let id = this.getAttribute('data-id')
+         console.log(parent,id)
+         parent.remove()
+         axios.post('/deleteComment',{id}).
+         then((result)=>{
+            console.log(result.data)
+         }).
+         catch((error)=>{
+            console.log(error)
+         })
+      }
+      
 function closComments(){
    let id = this.parentElement.getAttribute('data-id')
    let parent = this.parentElement

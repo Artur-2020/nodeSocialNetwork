@@ -25,45 +25,54 @@ requerstCount()
        then((result)=>{
            let users = result.data
            dropMenu.innerHTML=''
-           for(let i = 0;i<users.length;i++){
-               let div = document.createElement('div')
-                   div.setAttribute('class','requestBody')
-               let name = document.createElement('p')
-                   name.innerHTML=users[i]['name']
-                   name.setAttribute('class','requestName')
 
-               let surname = document.createElement('p')
-                   surname.innerHTML=users[i]['surname']
-                   
-                   surname.setAttribute('class','requestSurname')
-   
-               let image = document.createElement('img')
-                   image.setAttribute('src',`../${users[i]['image']}`)
-                   image.setAttribute('class','requestImage')
-   
-               let acceptBtn= document.createElement('button')
-                   acceptBtn.innerHTML=`<i class="lni lni-checkmark"></i>`
-                   acceptBtn.dataset.id = users[i]['id']
-                   acceptBtn.setAttribute('class','acceptReq')
-   
-               let delBtn= document.createElement('button')
-                   delBtn.innerHTML=`<i class="lni lni-close"></i>`
-                   delBtn.dataset.id = users[i]['id']
-                   delBtn.setAttribute('class','delReq')
-               // console.log(users[i]['id'])
-                div.append(image,name,surname,acceptBtn,delBtn)
-                dropMenu.append(div)   
+          if(users.length>0){
 
-                let acceptBtns=document.querySelectorAll('.acceptReq')
+            for(let i = 0;i<users.length;i++){
+                let div = document.createElement('div')
+                    div.setAttribute('class','requestBody')
+                let name = document.createElement('p')
+                    name.innerHTML=users[i]['name']
+                    name.setAttribute('class','requestName')
+ 
+                let surname = document.createElement('p')
+                    surname.innerHTML=users[i]['surname']
+                    
+                    surname.setAttribute('class','requestSurname')
+    
+                let image = document.createElement('img')
+                    image.setAttribute('src',`../${users[i]['image']}`)
+                    image.setAttribute('class','requestImage')
+    
+                let acceptBtn= document.createElement('button')
+                    acceptBtn.innerHTML=`<i class="lni lni-checkmark"></i>`
+                    acceptBtn.dataset.id = users[i]['id']
+                    acceptBtn.setAttribute('class','acceptReq')
+    
+                let delBtn= document.createElement('button')
+                    delBtn.innerHTML=`<i class="lni lni-close"></i>`
+                    delBtn.dataset.id = users[i]['id']
+                    delBtn.setAttribute('class','delReq')
+                // console.log(users[i]['id'])
+                 div.append(image,name,surname,acceptBtn,delBtn)
+                 dropMenu.append(div)   
+ 
+                 let acceptBtns=document.querySelectorAll('.acceptReq')
+ 
+                 for(let i = 0; i < acceptBtns.length;i++){
+                     acceptBtns[i].addEventListener('click',acceptRequest)
+                 }
+                 let delBtns = document.querySelectorAll('.delReq')
+                 for(let i = 0; i < delBtns.length;i++){
+                    delBtns[i].addEventListener('click',deletetRequest)
+                } 
+            }
+           
+          }
+          else{
+            dropMenu.style = `display:none;`
+          } 
 
-                for(let i = 0; i < acceptBtns.length;i++){
-                    acceptBtns[i].addEventListener('click',acceptRequest)
-                }
-                let delBtns = document.querySelectorAll('.delReq')
-                for(let i = 0; i < delBtns.length;i++){
-                   delBtns[i].addEventListener('click',deletetRequest)
-               }
-           }
        }).
        catch((error)=>{
            console.log(error)
@@ -336,40 +345,47 @@ requerstCount()
 
    document.getElementById('notificationDrop').addEventListener('click',function (){
        let notifDiv = document.getElementById('notifs')
+       document.getElementById('notificationCount').innerHTML = 0
        axios.post('getNotifs').
         then((result)=>{
-            let notifs = result.data
-            notifDiv.innerHTML = ''
-            for(let i = 0;i<notifs.length;i++ ){
-                let div =  document.createElement('div')
-                div.setAttribute('class','notifBody')
+            if(result.data.length>0){
+                let notifs = result.data
+                notifDiv.innerHTML = ''
+                for(let i = 0;i<notifs.length;i++ ){
+                    let div =  document.createElement('div')
+                    div.setAttribute('class','notifBody')
 
-                let image = document.createElement('img')
-                    image.setAttribute('src',`../${notifs[i]['image']}`)
-                    image.setAttribute('class','notifAuthorImage')
+                    let image = document.createElement('img')
+                        image.setAttribute('src',`../${notifs[i]['image']}`)
+                        image.setAttribute('class','notifAuthorImage')
 
-                let name = document.createElement('p')
-                    name.setAttribute('class','notifAuthorName')
-                    name.innerHTML=notifs[i]['name']
+                    let name = document.createElement('p')
+                        name.setAttribute('class','notifAuthorName')
+                        name.innerHTML=notifs[i]['name']
 
-                let surname = document.createElement('p')    
-                    surname.setAttribute('class','notifAuthorSurname')
-                    surname.innerHTML=notifs[i]['surname']
+                    let surname = document.createElement('p')    
+                        surname.setAttribute('class','notifAuthorSurname')
+                        surname.innerHTML=notifs[i]['surname']
 
-                let notification =  document.createElement('p')
-                    notification.setAttribute('class','notifText')    
-                    if(notifs[i]['type']=='like'){
-                        notification.innerHTML = 'liked youre post'
-                    }
-                    else{
-                        notification.innerHTML = 'commented on youre post'
-                    }
-                div.append(image,name,surname,notification)
-                notifDiv.append(div)    
+                    let notification =  document.createElement('p')
+                        notification.setAttribute('class','notifText')    
+                        if(notifs[i]['type']=='like'){
+                            notification.innerHTML = 'liked youre post'
+                        }
+                        else{
+                            notification.innerHTML = 'commented on youre post'
+                        }
+                    div.append(image,name,surname,notification)
+                    notifDiv.append(div)    
+                }
+
+                
+
             }
-
+            else{
+                notifDiv.style = `display:none;`
+            }
             
-
         }).
         catch((error)=>{
             console.log(error)

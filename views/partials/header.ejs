@@ -88,9 +88,14 @@
     let id = document.getElementById('userId').innerHTML 
     socket.emit('/number',{id})
     socket.on('/count',(data)=>{
-      console.log(data)
+      console.log('msg count',data)
       document.getElementById('msgCount').innerHTML=data['count'].count
     })
+    socket.on('/notifCount',(data)=>{
+      console.log(data)
+      document.getElementById('notificationCount').innerHTML = data['count']
+    })
+    
     
   </script>
 </html>

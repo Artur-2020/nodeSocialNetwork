@@ -175,6 +175,8 @@ router.post('/publicPosts',upload.single('image'),UserController.publicPost)
 
 router.post('/addComment',UserController.addComment)
 
+router.post('/deleteComment',UserController.deleteComment)
+
 router.post('/showPostComments',UserController.showPostComments)
 
 router.post('/like',UserController.like)
@@ -186,5 +188,9 @@ router.post('/getLikers',UserController.getLikers)
 router.post('/delPost',UserController.delPost)
 
 router.post('/getNotifs',UserController.getNotifs)
+
+router.post('/deleteAccount',UserController.deleteAccount)
+
+
 
 module.exports = router

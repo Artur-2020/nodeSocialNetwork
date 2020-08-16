@@ -11,6 +11,7 @@ const fs =  require('fs');
 const {check, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 const messageModel = require('../models/messageModel')
+const e = require('express')
 const saltRounds = 10;
 
 
@@ -59,6 +60,7 @@ class UserController {
               FriendPosts[i].liked = true
             }
           }
+          console.log('userPost',FriendPosts)
           
            res.render('profile',{user:user[0],UserPosts,FriendPosts})
           
@@ -111,6 +113,7 @@ class UserController {
             
           let passwordError={}
            let infoError={}
+           let delError= ''
            if(req.session.editError){
             req.session.editError.forEach((i)=>{
               if(infoError[i.param]==undefined){
@@ -127,8 +130,12 @@ class UserController {
             }) 
 
            }
+           else if(req.session.deleteError){
+             delError = req.session.deleteError
+
+           }
           
-           res.render('editdata',{editerrors:infoError,passerrors:passwordError,user:req.session.userInfo,flag})
+           res.render('editdata',{editerrors:infoError,passerrors:passwordError,user:req.session.userInfo,flag,delError})
         }
         else{
 
@@ -513,8 +520,40 @@ class UserController {
 
    async getNotifs(req,res){
    let notifs = await notificationModel.getNotifs(req.session.userId)
+    notificationModel.update({seen:1},{user2_id:req.session.userId})
     res.send(notifs)
+
   }
+   async deleteAccount(req,res){
+      console.log('ekats parol',req.body.delPas)
+      let user = await userModel.find({id:req.session.userId})
+
+      if(req.body.delPas==''){
+        req.session.deleteError = 'Fill in the blank'
+        res.redirect('/edit')
+
+
+      }
+      else{
+
+        let flag =  (bcrypt.compareSync(req.body.delPas, user[0].password ))
+        if(flag){
+
+          userModel.delete({id:req.session.userId})
+          res.redirect('/')
+          
+        }
+        else{
+          req.session.deleteError = 'Password is incorrect'
+          res.redirect('/edit')
+        }
+    }
+  }
+  deleteComment(req,res){
+    commentsModel.delete({id:req.body.id})
+    res.send('deleted')
+  }
+   
   
 }
 

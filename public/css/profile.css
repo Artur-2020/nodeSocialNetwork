@@ -410,3 +410,11 @@
 	.notifId{
 		display: none;
 	}
+	.closeComments{
+		border: none;
+	}
+	.deleteCom{
+		display: inline;
+		border: none;
+		padding:0;
+	}
